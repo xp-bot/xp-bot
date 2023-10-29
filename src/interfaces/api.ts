@@ -1,7 +1,7 @@
 export interface IApiSuccess<Body> {
   success: true;
   message: string;
-  body: Body;
+  content: Body;
 }
 
 export interface IApiFailure {

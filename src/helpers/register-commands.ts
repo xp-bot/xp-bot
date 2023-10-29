@@ -16,20 +16,24 @@ const DEBUG_GUILD_ID_ = process.env.DEBUG_GUILD_ID;
 export default () => {
   discordClient.commands = new Collection();
 
-  const commandsPath = path.join(__dirname, '..', 'commands');
-  const commandFiles = filter(fs.readdirSync(commandsPath), (file) =>
-    endsWith(file, '.ts')
-  );
+  const foldersPath = path.join(__dirname, '..', 'commands');
+  const commandFolders = fs.readdirSync(foldersPath);
 
-  for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const command: Command = require(filePath).default;
-    if (!command.deleteCommand) {
-      command.registerCommand();
-    } else {
-      // TODO: Delete commands flagged for deletion
-      console.log('[WARNING] Command is to be deleted.');
+  for (const folder of commandFolders) {
+    const commandsPath = path.join(foldersPath, folder);
+    const commandFiles = filter(fs.readdirSync(commandsPath), (file) =>
+      endsWith(file, '.ts')
+    );
+    for (const file of commandFiles) {
+      const filePath = path.join(commandsPath, file);
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const command: Command = require(filePath).default;
+      if (!command.deleteCommand) {
+        command.registerCommand();
+      } else {
+        // TODO: Delete commands flagged for deletion
+        console.log('[WARNING] Command is to be deleted.');
+      }
     }
   }
 

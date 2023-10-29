@@ -1,5 +1,5 @@
-import { ChatInputCommandInteraction } from 'discord.js';
-import Command from '../classes/command';
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import Command from '../../classes/command';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   interaction.reply({ ephemeral: true, content: 'test' });
@@ -9,9 +9,6 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-  {
-    commandDescription: 'test-command',
-    commandName: 'test',
-  },
+  new SlashCommandBuilder().setName('test').setDescription('Test command'),
   execute
 );

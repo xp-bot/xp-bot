@@ -2,45 +2,43 @@ import {
   ChatInputCommandInteraction,
   Interaction,
   SlashCommandBuilder,
+  SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import discordClient from '../clients/discord-client';
 
-interface CommandData {
-  commandName: string;
-  commandDescription: string;
-}
+type slashCommandBuilderData =
+  | SlashCommandBuilder
+  | SlashCommandSubcommandsOnlyBuilder
+  | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
 
 export default class Command {
-  private commandData: CommandData;
+  private slashCommand: slashCommandBuilderData;
   deleteCommand: boolean = false;
   executeCallback: (interaction: ChatInputCommandInteraction) => Promise<void>;
 
   constructor(
-    commandData: CommandData,
+    slashCommand: slashCommandBuilderData,
     executeCallback: (
       interaction: ChatInputCommandInteraction
     ) => Promise<void>,
     deleteCommand?: boolean
   ) {
-    this.commandData = commandData;
+    this.slashCommand = slashCommand;
     this.deleteCommand = deleteCommand || false;
     this.executeCallback = executeCallback;
   }
 
-  getRegistratorData = () =>
-    new SlashCommandBuilder()
-      .setName(this.commandData.commandName)
-      .setDescription(this.commandData.commandDescription);
+  getRegistratorData = () => this.slashCommand;
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
     console.log(
-      `[COMMAND] Recieved command request [${this.commandData.commandName}]`
+      `[COMMAND] Recieved command request [${this.slashCommand.name}]`
     );
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
         console.log(
-          `[COMMAND] Successfully executed command [${this.commandData.commandName}]`
+          `[COMMAND] Successfully executed command [${this.slashCommand.name}]`
         );
       })
       .catch(() => {
@@ -56,6 +54,6 @@ export default class Command {
   };
 
   registerCommand = () => {
-    discordClient.commands.set(this.commandData.commandName, this);
+    discordClient.commands.set(this.slashCommand.name, this);
   };
 }
