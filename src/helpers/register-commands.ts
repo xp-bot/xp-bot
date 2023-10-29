@@ -1,4 +1,3 @@
-import console from 'console';
 import { Collection } from 'discord.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
