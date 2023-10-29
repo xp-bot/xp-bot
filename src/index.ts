@@ -1,7 +1,7 @@
 import { Events } from 'discord.js';
 import dotenv from 'dotenv';
 import discordClient from './clients/discord-client';
-import handlers from './handlers';
+import handlers from './handlers/discord-events';
 dotenv.config();
 
 const client = discordClient;

@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import discordClient from '../clients/discord-client';
+import discordClient from '../../clients/discord-client';
 import ready from './ready';
 import interactionCreate from './interaction-create';
 import guildCreate from './guild-create';
