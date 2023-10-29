@@ -1,0 +1,26 @@
+{
+  "name": "xp-bot",
+  "version": "9.0.0",
+  "description": "The official XP Discord Bot",
+  "main": "src/index.ts",
+  "repository": "https://github.com/xp-bot/xp-bot.git",
+  "author": "namespace.media",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix"
+  },
+  "dependencies": {
+    "@types/node": "^20.8.9",
+    "discord.js": "^14.13.0",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-plugin-lodash": "^7.4.0",
+    "ts-node": "^10.9.1"
+  }
+}
