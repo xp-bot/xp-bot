@@ -1,5 +1,5 @@
 import { ActionRowBuilder, AuditLogEvent, ButtonBuilder, ButtonStyle, Client, EmbedBuilder } from 'discord.js';
-import { isNil } from 'lodash';
+import { isNil, noop } from 'lodash';
 
 export default (client: Client) => {
   client.on('guildCreate', async (guild) => {
@@ -54,13 +54,12 @@ export default (client: Client) => {
         privacyPolicyButton
       );
 
-    try {
-      await auditLogUser.send({
+    await auditLogUser.send({
         embeds: [welcomeEmbed],
         components: [welcomeActionRow]
-      });
-    } catch (error) {
-      // No need to catch error here
-    }
+        
+    }).catch(noop)
+
   });
+    
 };
