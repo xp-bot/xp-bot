@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node src/index.ts | pino-pretty",
+    "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"
   },
