@@ -1,13 +1,30 @@
-import { ActionRowBuilder, AuditLogEvent, ButtonBuilder, ButtonStyle, Client, EmbedBuilder } from 'discord.js';
-import { isNil, noop } from 'lodash';
+import { error } from 'console';
+import { ActionRowBuilder, AuditLogEvent, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GuildAuditLogs, GuildMember } from 'discord.js';
+import { isNil } from 'lodash';
 
 export default (client: Client) => {
-  client.on('guildCreate', async (guild) => {
-    const auditLogCheck = (await guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.BotAdd})).entries.first()?.executorId || guild.ownerId;
+  client.on(Events.GuildCreate, async (guild) => {
+    let auditLogCheck: GuildAuditLogs<AuditLogEvent.BotAdd>
+
+    try {
+      auditLogCheck = await guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.BotAdd});
+    } catch (error) {
+      console.log(error);
+      return;
+    }
     // Checks for the user who has added the bot to the guild. If the user is not found, it will mention the owner of the guild
-        
-    const auditLogUser = await guild.members.fetch(auditLogCheck);
-    if (isNil(auditLogCheck)) return;
+    
+    const auditLogUserId = auditLogCheck.entries.first()?.executorId || guild.ownerId;
+    let auditLogUser: GuildMember
+
+    try {
+      auditLogUser = await guild.members.fetch(auditLogUserId);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+
+    if (isNil(auditLogUser)) return;
 
     const welcomeEmbed = new EmbedBuilder()
       .setThumbnail(guild.client.user?.displayAvatarURL())
@@ -54,11 +71,16 @@ export default (client: Client) => {
         privacyPolicyButton
       );
 
-    await auditLogUser.send({
+    try {
+      await auditLogUser.send({
         embeds: [welcomeEmbed],
         components: [welcomeActionRow]
-        
-    }).catch(noop)
+
+      })
+    } catch (error) {
+      console.log(error);
+      return;
+    }
 
   });
     
