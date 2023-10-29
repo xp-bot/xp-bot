@@ -48,7 +48,7 @@ Please follow these guidelines to ensure your contributions are accepted:
 
 > **Note**: Pull requests that do not follow these guidelines will be rejected.
 
-> For more information on branch and commit naming conventions, you can refer to this Convention Guide.[README](https://dev.to/varbsan/a-simplified-convention-for-naming-branches-and-commits-in-git-il4)
+> For more information on branch and commit naming conventions, you can refer to this [Convention Guide](https://dev.to/varbsan/a-simplified-convention-for-naming-branches-and-commits-in-git-il4).
 
 ---
 
