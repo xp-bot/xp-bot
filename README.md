@@ -16,7 +16,7 @@ To run the XP v9 bot, follow these simple steps:
    - Open the `.env` file and fill in the required values as per the configuration instructions.
 
 2. **Start the Bot**:
-   - After you've configured the `.env` file, you're ready to start the bot.
+   - After you've configured the `.env` file, you're ready to start the bot with `yarn dev`.
 
 That's it! You are now set up to run XP v9. If you encounter any issues or have questions, please refer to the Contribution Guide for assistance.
 
