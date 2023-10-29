@@ -21,4 +21,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
+      - run: npx eslint src/**/*.ts
       - run: yarn build
