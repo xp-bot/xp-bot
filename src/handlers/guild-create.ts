@@ -3,7 +3,6 @@ import { isNil } from 'lodash';
 
 export default (client: Client) => {
   client.on('guildCreate', async (guild) => {
-    console.log(`Joined a new guild: ${guild.name}`);
     const auditLogCheck = (await guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.BotAdd})).entries.first()?.executorId || guild.ownerId;
     // Checks for the user who has added the bot to the guild. If the user is not found, it will mention the owner of the guild
         
