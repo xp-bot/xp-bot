@@ -9,3 +9,13 @@ declare namespace NodeJS {
     ILUM_API_TOKEN: string;
   }
 }
+declare global {
+  interface Console {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    log: (message: string, ...optionalParams: any[]) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    debug: (message: string, ...optionalParams: any[]) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error: (message: string, ...optionalParams: any[]) => void;
+  }
+}

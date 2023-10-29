@@ -16,7 +16,7 @@
     "files": true
   },
   "files": [
-    "src/index.ts",
+    "src/bot.ts",
     "src/types/global.d.ts"
   ],
   "include": [

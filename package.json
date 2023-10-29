@@ -7,7 +7,7 @@
   "author": "namespace.media",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts | pino-pretty",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"
   },
@@ -17,6 +17,8 @@
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
+    "pino": "^8.16.1",
+    "pino-pretty": "^10.2.3",
     "typescript": "^5.2.2"
   },
   "devDependencies": {

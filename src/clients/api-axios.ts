@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { replace } from 'lodash';
-import axiosApp from '../handlers/api/axios-app';
+import axiosApp from '../helpers/api/axios-app';
 import { IApiFailure, IApiSuccess } from '../interfaces/api';
 
 export default async <Body>(route: string, options: AxiosRequestConfig) => {
