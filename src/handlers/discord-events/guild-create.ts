@@ -3,10 +3,10 @@ import { isNil } from 'lodash';
 
 export default (client: Client) => {
   client.on(Events.GuildCreate, async (guild) => {
-    let auditLogCheck: GuildAuditLogs<AuditLogEvent.BotAdd>
+    let auditLogCheck: GuildAuditLogs<AuditLogEvent.BotAdd>;
 
     try {
-      auditLogCheck = await guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.BotAdd});
+      auditLogCheck = await guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.BotAdd });
     } catch (error) {
       console.log(error);
       return;
@@ -14,7 +14,7 @@ export default (client: Client) => {
     // Checks for the user who has added the bot to the guild. If the user is not found, it will mention the owner of the guild
     
     const auditLogUserId = auditLogCheck.entries.first()?.executorId || guild.ownerId;
-    let auditLogUser: GuildMember
+    let auditLogUser: GuildMember;
 
     try {
       auditLogUser = await guild.members.fetch(auditLogUserId);
@@ -75,7 +75,7 @@ export default (client: Client) => {
         embeds: [welcomeEmbed],
         components: [welcomeActionRow]
 
-      })
+      });
     } catch (error) {
       console.log(error);
       return;
