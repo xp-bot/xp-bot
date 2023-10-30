@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node src/index.ts | pino-pretty",
-    "build": "tsc",
+    "build": "yarn lint && tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"
   },
@@ -27,7 +27,10 @@
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
     "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-lodash": "^7.4.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "3.0.3",
     "ts-node": "^10.9.1"
   }
 }

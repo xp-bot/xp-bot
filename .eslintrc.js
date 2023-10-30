@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:lodash/recommended',
+    'plugin:prettier/recommended',
   ],
   overrides: [
     {
@@ -25,8 +26,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'lodash'],
+  plugins: ['@typescript-eslint', 'lodash', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
