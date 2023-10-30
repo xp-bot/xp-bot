@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     // indent: ['error', 2],
+    'max-depth': ['error', 3],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
