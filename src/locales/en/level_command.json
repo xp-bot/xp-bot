@@ -1,0 +1,1 @@
+{"command_info":{"description":"Check the required xp to reach a certain level.","name":"level"},"description":{"n_away_from_level":"You're **{{xp}}xp** away from reaching **$t(level_n, {\"level\": {{level}}, \"ns\": \"global\" })**.","reached_n_of_level":"You've reached {{percent}}% of $t(level_n, {\"level\": {{level}}, \"ns\": \"global\" })."}}

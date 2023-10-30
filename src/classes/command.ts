@@ -4,6 +4,7 @@ import {
   SlashCommandBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
+import { t } from 'i18next';
 import discordClient from '../clients/discord-client';
 
 type slashCommandBuilderData =
@@ -28,7 +29,37 @@ export default class Command {
     this.executeCallback = executeCallback;
   }
 
-  getRegistratorData = () => this.slashCommand;
+  getRegistratorData = () =>
+    this.slashCommand
+      .setDescription(
+        t(['command_info.description', `${this.slashCommand.name} command`], {
+          ns: `${this.slashCommand.name}_command`,
+          lng: 'en',
+        }),
+      )
+      .setNameLocalizations({
+        de: t(['command_info.name', this.slashCommand.name], {
+          ns: `${this.slashCommand.name}_command`,
+          lng: 'de',
+        }),
+        'en-US': t(['command_info.name', this.slashCommand.name], {
+          ns: `${this.slashCommand.name}_command`,
+          lng: 'en',
+        }),
+      })
+      .setDescriptionLocalizations({
+        de: t(['command_info.description', this.slashCommand.description], {
+          ns: `${this.slashCommand.name}_command`,
+          lng: 'de',
+        }),
+        'en-US': t(
+          ['command_info.description', this.slashCommand.description],
+          {
+            ns: `${this.slashCommand.name}_command`,
+            lng: 'en',
+          },
+        ),
+      });
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;

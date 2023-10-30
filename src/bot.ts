@@ -3,18 +3,25 @@ import dotenv from 'dotenv';
 import discordClient from './clients/discord-client';
 import handlers from './handlers/discord-events';
 import customLogger from './helpers/custom-logger';
+import initI18n from './helpers/localization/init-i18n';
 dotenv.config();
 
-customLogger();
+const main = async () => {
+  customLogger();
 
-const client = discordClient;
-const TOKEN_ = process.env.TOKEN;
+  const client = discordClient;
+  const TOKEN_ = process.env.TOKEN;
 
-// This is a last resort handler for errors which were not handled by any other event handler and should never be called.
-client.on(Events.Error, (e) => {
-  console.error(e, 'error');
-});
+  // This is a last resort handler for errors which were not handled by any other event handler and should never be called.
+  client.on(Events.Error, (e) => {
+    console.error(e, 'error');
+  });
 
-handlers();
+  await initI18n;
 
-client.login(TOKEN_);
+  handlers();
+
+  client.login(TOKEN_);
+};
+
+main();

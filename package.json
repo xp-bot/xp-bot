@@ -10,13 +10,18 @@
     "dev": "ts-node src/index.ts | pino-pretty",
     "build": "yarn lint && tsc",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts --fix"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "translate": "i18nexus pull -k $(grep I18N_TOKEN .env | cut -d '=' -f2) -p src/locales"
   },
   "dependencies": {
     "@types/node": "^20.8.9",
     "axios": "^1.6.0",
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
+    "i18next": "^23.6.0",
+    "i18next-http-backend": "^2.3.1",
+    "i18next-resources-to-backend": "^1.1.4",
+    "i18nexus-cli": "^3.3.0",
     "lodash": "^4.17.21",
     "pino": "^8.16.1",
     "pino-pretty": "^10.2.3",
