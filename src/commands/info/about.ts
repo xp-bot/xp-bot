@@ -3,7 +3,11 @@ import defaultEmbed from '../../helpers/messaging/default-embed';
 import Command from '../../classes/command';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
-  if (!interaction.guildId || !interaction.user.id || !interaction.guild) return;
+  if (!interaction.guildId || !interaction.user.id || !interaction.guild) {
+    await interaction.reply({ content: 'Invalid interaction.', ephemeral: true });
+    // TODO: Error Handling
+    return;
+  }
 
   const aboutInfoEmbed = defaultEmbed('normal')
     .setTitle('Reimagine your Community')
