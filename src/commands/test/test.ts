@@ -10,5 +10,5 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 export default new Command(
   new SlashCommandBuilder().setName('test').setDescription('Test command'),
-  execute
+  execute,
 );

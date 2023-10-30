@@ -29,10 +29,11 @@ export default class Command {
     this.executeCallback = executeCallback;
   }
 
-  getRegistratorData = () =>
+  getRegistratorData = () => {
+    const fallbackString = `${this.slashCommand.name} command`;
     this.slashCommand
       .setDescription(
-        t(['command_info.description', `${this.slashCommand.name} command`], {
+        t(['command_info.description', fallbackString], {
           ns: `${this.slashCommand.name}_command`,
           lng: 'en',
         }),
@@ -48,18 +49,30 @@ export default class Command {
         }),
       })
       .setDescriptionLocalizations({
-        de: t(['command_info.description', this.slashCommand.description], {
-          ns: `${this.slashCommand.name}_command`,
-          lng: 'de',
-        }),
+        de: t(
+          [
+            'command_info.description',
+            this.slashCommand.description,
+            fallbackString,
+          ],
+          {
+            ns: `${this.slashCommand.name}_command`,
+            lng: 'de',
+          },
+        ),
         'en-US': t(
-          ['command_info.description', this.slashCommand.description],
+          [
+            'command_info.description',
+            this.slashCommand.description,
+            fallbackString,
+          ],
           {
             ns: `${this.slashCommand.name}_command`,
             lng: 'en',
           },
         ),
       });
+  };
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
