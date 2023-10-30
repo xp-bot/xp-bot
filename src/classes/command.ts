@@ -5,6 +5,7 @@ import {
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import { t } from 'i18next';
+import { replace } from 'lodash';
 import discordClient from '../clients/discord-client';
 
 type slashCommandBuilderData =
@@ -31,20 +32,31 @@ export default class Command {
 
   getRegistratorData = () => {
     const fallbackString = `${this.slashCommand.name} command`;
+    const sanatisedCommandName = replace(
+      this.slashCommand.name,
+      /[^a-z]+/g,
+      '_',
+    );
     this.slashCommand
       .setDescription(
-        t(['command_info.description', fallbackString], {
-          ns: `${this.slashCommand.name}_command`,
-          lng: 'en',
-        }),
+        t(
+          [
+            'command_info.description',
+            this.slashCommand.description || fallbackString,
+          ],
+          {
+            ns: `${sanatisedCommandName}_command`,
+            lng: 'en',
+          },
+        ),
       )
       .setNameLocalizations({
         de: t(['command_info.name', this.slashCommand.name], {
-          ns: `${this.slashCommand.name}_command`,
+          ns: `${sanatisedCommandName}_command`,
           lng: 'de',
         }),
         'en-US': t(['command_info.name', this.slashCommand.name], {
-          ns: `${this.slashCommand.name}_command`,
+          ns: `${sanatisedCommandName}_command`,
           lng: 'en',
         }),
       })
@@ -56,7 +68,7 @@ export default class Command {
             fallbackString,
           ],
           {
-            ns: `${this.slashCommand.name}_command`,
+            ns: `${sanatisedCommandName}_command`,
             lng: 'de',
           },
         ),
@@ -67,7 +79,7 @@ export default class Command {
             fallbackString,
           ],
           {
-            ns: `${this.slashCommand.name}_command`,
+            ns: `${sanatisedCommandName}_command`,
             lng: 'en',
           },
         ),
