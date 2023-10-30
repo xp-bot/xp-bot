@@ -19,9 +19,9 @@ export default class Command {
   constructor(
     slashCommand: slashCommandBuilderData,
     executeCallback: (
-      interaction: ChatInputCommandInteraction
+      interaction: ChatInputCommandInteraction,
     ) => Promise<void>,
-    deleteCommand?: boolean
+    deleteCommand?: boolean,
   ) {
     this.slashCommand = slashCommand;
     this.deleteCommand = deleteCommand || false;
@@ -33,12 +33,12 @@ export default class Command {
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
     console.log(
-      `[COMMAND] Recieved command request [${this.slashCommand.name}]`
+      `[COMMAND] Recieved command request [${this.slashCommand.name}]`,
     );
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
         console.log(
-          `[COMMAND] Successfully executed command [${this.slashCommand.name}]`
+          `[COMMAND] Successfully executed command [${this.slashCommand.name}]`,
         );
       })
       .catch(() => {

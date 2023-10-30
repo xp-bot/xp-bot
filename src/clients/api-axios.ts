@@ -7,9 +7,9 @@ export default async <Body>(route: string, options: AxiosRequestConfig) => {
   try {
     const { data } = await axiosApp<IApiSuccess<Body> | IApiFailure>({
       url: replace(route, /^\/+/g, ''),
-      headers:{
-        'Authorization': `Bearer ${process.env.API_TOKEN}`,
-        ...options.headers
+      headers: {
+        Authorization: `Bearer ${process.env.API_TOKEN}`,
+        ...options.headers,
       },
       ...options,
     });

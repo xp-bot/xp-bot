@@ -22,7 +22,7 @@ export default () => {
   for (const folder of commandFolders) {
     const commandsPath = path.join(foldersPath, folder);
     const commandFiles = filter(fs.readdirSync(commandsPath), (file) =>
-      endsWith(file, '.ts')
+      endsWith(file, '.ts'),
     );
     for (const file of commandFiles) {
       const filePath = path.join(commandsPath, file);
@@ -43,8 +43,8 @@ export default () => {
     try {
       console.log(
         `Started refreshing ${size(
-          discordClient.commands
-        )} application commands.`
+          discordClient.commands,
+        )} application commands.`,
       );
 
       if (!DEBUG_GUILD_ID_)
@@ -52,7 +52,7 @@ export default () => {
           // Using legacy .map due to typing issues
           // eslint-disable-next-line lodash/prefer-lodash-method
           body: (discordClient.commands as Collection<string, Command>).map(
-            (command) => command.getRegistratorData().toJSON()
+            (command) => command.getRegistratorData().toJSON(),
           ),
         });
       else
@@ -62,9 +62,9 @@ export default () => {
             // Using legacy .map due to typing issues
             // eslint-disable-next-line lodash/prefer-lodash-method
             body: (discordClient.commands as Collection<string, Command>).map(
-              (command) => command.getRegistratorData().toJSON()
+              (command) => command.getRegistratorData().toJSON(),
             ),
-          }
+          },
         );
 
       console.log('Successfully reloaded application commands.');
