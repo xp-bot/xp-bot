@@ -37,7 +37,7 @@ export default class Command {
       /[^a-z]+/g,
       '_',
     );
-    this.slashCommand
+    return this.slashCommand
       .setDescription(
         t(
           [
