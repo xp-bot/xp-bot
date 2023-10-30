@@ -1,4 +1,3 @@
-import { error } from 'console';
 import { ActionRowBuilder, AuditLogEvent, ButtonBuilder, ButtonStyle, Client, EmbedBuilder, Events, GuildAuditLogs, GuildMember } from 'discord.js';
 import { isNil } from 'lodash';
 
