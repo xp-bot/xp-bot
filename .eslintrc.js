@@ -29,10 +29,19 @@ module.exports = {
   plugins: ['@typescript-eslint', 'lodash', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
-    indent: ['error', 2],
+    // indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn', // or "error"
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
 
     'lodash/import-scope': [2, 'member'],
   },

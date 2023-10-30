@@ -30,6 +30,49 @@ To maintain consistency and code quality, please adhere to the following coding 
 
 - **Error Handling**: Ensure that promises rejection is always handled, even if you are confident they will not be rejected.
 
+## Localization Guidelines
+### i18next
+We're using namespaces to seperate usecases (Commands, Utilities, Environments, ...). For any word separation, we use snake_case. For Categories we use decimals as separation.
+
+Key categories will always be named in a singular form. (e.g. button.x instead of buttons.x)
+
+```diff
+// These are valid keys. //
+// namespace: global
++  ok
++  dismiss
+
+// namespace: level_command
++  title.required_xp
++  subtitle.required_xp
+
+// These are invalid keys. //
+-  global.button.ok
+-  form.title_createList
+-  global.title.create-list
+```
+
+### Command Localization Guidelines
+> **Attention**: These guidelines have to be followed to the letter. Otherwise, command localization might break and your pull request will be rejected.
+
+- Every command has to have a namespace. The namespace is the command name in snake_case followed by `_command`. (e.g. set_xp_command, party_command, ...)
+- Every command's namespace, has to have the following keys:
+  - command_info.name
+  - command_info.description
+
+### Global Namespace
+
+The global namespace is intended to be used for very generic translations or strings that can and will be used everywhere without context.
+
+> E.g. title.success in namespace set_xp_command, button.join in namespace party_command, ok in namespace global, ...
+
+```ts
+  // Building a key correctly
+  party_command / `title`.`success`
+        ^            ^        ^
+    Namespace | Category | Content
+```
+
 ## Pull Requests
 
 1. **Link to an Issue**: Every pull request should be linked to an existing issue. If there's no relevant issue, please create one before submitting your pull request.

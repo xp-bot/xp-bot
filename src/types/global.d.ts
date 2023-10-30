@@ -7,6 +7,7 @@ declare namespace NodeJS {
     API_TOKEN: string;
     ILUM_API: string;
     ILUM_API_TOKEN: string;
+    I18N_TOKEN: string;
   }
 }
 declare global {
