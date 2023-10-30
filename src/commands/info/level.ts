@@ -58,13 +58,31 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-  new SlashCommandBuilder()
-    .setName('level')
-    .addIntegerOption((option) =>
-      option
-        .setName('level')
-        .setDescription('The level to check the required xp for.')
-        .setRequired(true),
-    ),
+  new SlashCommandBuilder().setName('level').addIntegerOption((option) =>
+    option
+      .setName('level')
+      .setDescription('The level to check the required xp for.')
+      .setNameLocalizations({
+        de: t(['command_info.option.level.name', 'level'], {
+          ns: 'level_command',
+          lng: 'de',
+        }),
+        'en-US': t(['command_info.option.level.name', 'level'], {
+          ns: 'level_command',
+          lng: 'en',
+        }),
+      })
+      .setDescriptionLocalizations({
+        de: t(['command_info.option.level.description', 'level'], {
+          ns: 'level_command',
+          lng: 'de',
+        }),
+        'en-US': t(['command_info.option.level.description', 'level'], {
+          ns: 'level_command',
+          lng: 'en',
+        }),
+      })
+      .setRequired(true),
+  ),
   execute,
 );
