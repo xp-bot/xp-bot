@@ -73,14 +73,26 @@ export default new Command(
         }),
       })
       .setDescriptionLocalizations({
-        de: t(['command_info.option.level.description', 'level'], {
-          ns: 'level_command',
-          lng: 'de',
-        }),
-        'en-US': t(['command_info.option.level.description', 'level'], {
-          ns: 'level_command',
-          lng: 'en',
-        }),
+        de: t(
+          [
+            'command_info.option.level.description',
+            'The level to check the required xp for.',
+          ],
+          {
+            ns: 'level_command',
+            lng: 'de',
+          },
+        ),
+        'en-US': t(
+          [
+            'command_info.option.level.description',
+            'The level to check the required xp for.',
+          ],
+          {
+            ns: 'level_command',
+            lng: 'en',
+          },
+        ),
       })
       .setRequired(true),
   ),
