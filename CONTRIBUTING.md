@@ -57,8 +57,47 @@ Key categories will always be named in a singular form. (e.g. button.x instead o
 
 - Every command has to have a namespace. The namespace is the command name in snake_case followed by `_command`. (e.g. set_xp_command, party_command, ...)
 - Every command's namespace, has to have the following keys:
-  - command_info.name
-  - command_info.description
+  - `command_info.name`
+  - `command_info.description`
+- If the command has values, these have to be named as follows:
+  - `command_info.option.<option_name>.name`
+  - `command_info.option.<option_name>.description`
+  > Note, that these translations will not be applied automatically. You have to apply them manually in the command's declaration code.\
+  > Example:\
+  > ```ts
+  > export default new Command(
+  >   new SlashCommandBuilder().setName('level').addIntegerOption((option) =>
+  >     option
+  >       .setName('level')
+  >       // This description is essentially a fallback.
+  >       .setDescription('The level to check the required xp for.')
+  >       // Also provide fallbacks for option names. (The second argument in the array is the fallback value. "level" in this case.)
+  >       .setNameLocalizations({
+  >         de: t(['command_info.option.level.name', 'level'], {
+  >           ns: 'level_command',
+  >           lng: 'de',
+  >         }),
+  >         'en-US': t(['command_info.option.level.name', 'level'], {
+  >           ns: 'level_command',
+  >           lng: 'en',
+  >         }),
+  >       })
+  >       // Also provide fallbacks for option descriptions. (The second argument in the array is the fallback value.)
+  >       .setDescriptionLocalizations({
+  >         de: t(['command_info.option.level.description', 'The level to check the required xp for.'], {
+  >           ns: 'level_command',
+  >           lng: 'de',
+  >         }),
+  >         'en-US': t(['command_info.option.level.description', 'The level to check the required xp for.'], {
+  >           ns: 'level_command',
+  >           lng: 'en',
+  >         }),
+  >       })
+  >       .setRequired(true),
+  >   ),
+  >   execute,
+  > );
+  > ```
 
 ### Global Namespace
 

@@ -4,7 +4,7 @@ import resourcesToBackend from 'i18next-resources-to-backend';
 const i18nextConfig = {
   fallbackLng: 'en',
   fallbackNS: 'global',
-  ns: ['global', 'level_command', 'test_command'],
+  ns: ['global', 'level_command', 'test_command', 'rank_command'],
   debug: !!process.env.DEBUG_GUILD_ID,
 };
 
