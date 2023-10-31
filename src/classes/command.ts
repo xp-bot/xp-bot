@@ -5,8 +5,9 @@ import {
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import { t } from 'i18next';
-import { replace } from 'lodash';
+import { noop, replace } from 'lodash';
 import discordClient from '../clients/discord-client';
+import XPError from './xp-error';
 
 type slashCommandBuilderData =
   | SlashCommandBuilder
@@ -88,24 +89,24 @@ export default class Command {
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
-    console.log(
-      `[COMMAND] Recieved command request [${this.slashCommand.name}]`,
-    );
+    console.log(`Recieved command request [${this.slashCommand.name}]`);
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
         console.log(
-          `[COMMAND] Successfully executed command [${this.slashCommand.name}]`,
+          `Successfully executed command [${this.slashCommand.name}]`,
         );
       })
-      .catch(() => {
+      .catch((error: XPError) => {
+        console.error(`${error.message}.`, [
+          { command: this.slashCommand.name },
+          ...(error.details || []),
+        ]);
         interaction
           .reply({
             content: 'An error occured while executing this command.',
             ephemeral: true,
           })
-          .catch(() => {
-            console.log('An error occured while executing this command.');
-          });
+          .catch(noop);
       });
   };
 
