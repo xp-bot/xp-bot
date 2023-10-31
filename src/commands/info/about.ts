@@ -25,24 +25,58 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     .setTitle('Reimagine your Community')
     .addFields(
       {
-        name: 'Top-Tier Leveling Solution',
-        value:
-          'Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.',
+        name: t('fields.summary_title', {
+          //'Top-Tier Leveling Solution'
+          lng: 'en',
+          ns: 'about_command',
+        }),
+        value: t('fields.summary_description', {
+          //'Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.'
+          lng: 'en',
+          ns: 'about_command',
+        }),
         inline: false,
       },
       {
-        name: 'Official Support Server',
-        value: '[Join XP](https://discord.com/invite/ccTAnzw)',
+        name: t('fields.server_title', {
+          //'Join our Server'
+          lng: 'en',
+          ns: 'about_command',
+        }),
+        value: t('fields.server_link', {
+          //'[Join XP](https://discord.com/invite/ccTAnzw)'
+          lng: 'en',
+          ns: 'about_command',
+          link: 'https://discord.com/invite/ccTAnzw',
+        }),
         inline: true,
       },
       {
-        name: 'Vote for XP!',
-        value: '[top.gg](https://top.gg/bot/706935674800177193)',
+        name: t('fields.vote_title', {
+          //'Vote for XP!'
+          lng: 'en',
+          ns: 'about_command',
+        }),
+        value: t('fields.vote_link', {
+          //'[top.gg](https://top.gg/bot/706935674800177193)'
+          lng: 'en',
+          ns: 'about_command',
+          link: 'https://top.gg/bot/706935674800177193',
+        }),
         inline: true,
       },
       {
-        name: 'Service Status',
-        value: '[Status](https://xp-bot.net/status)',
+        name: t('fields.status_title', {
+          //'Service Status'
+          lng: 'en',
+          ns: 'about_command',
+        }),
+        value: t('fields.status_link', {
+          //'[Status](https://xp-bot.net/status)'
+          lng: 'en',
+          ns: 'about_command',
+          link: 'https://status.xp-bot.net',
+        }),
         inline: true,
       },
     );
@@ -85,7 +119,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     await interaction.reply({
       embeds: [
         aboutInfoEmbed.setFooter({
-          text: t('description.response_shard_company_info', {
+          text: t('footer.response_shard_company_info', {
             lng: 'en',
             ns: 'about_command',
             response: Date.now() - interaction.createdTimestamp,
