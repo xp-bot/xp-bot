@@ -22,7 +22,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   }
 
   const aboutInfoEmbed = defaultEmbed(DefaultEmbedType.NORMAL)
-    .setTitle('Reimagine your Community')
+    .setTitle(`${t('title.title', { lng: 'en', ns: 'about_command' })}}`)
     .addFields(
       {
         name: t('fields.summary_title', {
