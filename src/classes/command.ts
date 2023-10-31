@@ -5,8 +5,8 @@ import {
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import { t } from 'i18next';
-import { replace } from 'lodash';
 import discordClient from '../clients/discord-client';
+import sanatiseCommandName from '../helpers/command-handling/sanatise-command-name';
 
 type slashCommandBuilderData =
   | SlashCommandBuilder
@@ -32,11 +32,7 @@ export default class Command {
 
   getRegistratorData = () => {
     const fallbackString = `${this.slashCommand.name} command`;
-    const sanatisedCommandName = replace(
-      this.slashCommand.name,
-      /[^a-z]+/g,
-      '_',
-    );
+    const sanatisedCommandName = sanatiseCommandName(this.slashCommand.name);
     return this.slashCommand
       .setDescription(
         t(
