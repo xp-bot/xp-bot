@@ -22,15 +22,15 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   }
 
   const aboutInfoEmbed = defaultEmbed(DefaultEmbedType.NORMAL)
-    .setTitle(`${t('title.title', { lng: 'en', ns: 'about_command' })}}`)
+    .setTitle(`${t('title', { lng: 'en', ns: 'about_command' })}}`)
     .addFields(
       {
-        name: t('fields.summary_title', {
+        name: t('field.summary_title', {
           //'Top-Tier Leveling Solution'
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('fields.summary_description', {
+        value: t('field.summary_description', {
           //'Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.'
           lng: 'en',
           ns: 'about_command',
@@ -38,12 +38,12 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         inline: false,
       },
       {
-        name: t('fields.server_title', {
+        name: t('field.server_title', {
           //'Join our Server'
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('fields.server_link', {
+        value: t('field.server_link', {
           //'[Join XP](https://discord.com/invite/ccTAnzw)'
           lng: 'en',
           ns: 'about_command',
@@ -52,12 +52,12 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         inline: true,
       },
       {
-        name: t('fields.vote_title', {
+        name: t('field.vote_title', {
           //'Vote for XP!'
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('fields.vote_link', {
+        value: t('field.vote_link', {
           //'[top.gg](https://top.gg/bot/706935674800177193)'
           lng: 'en',
           ns: 'about_command',
@@ -66,12 +66,12 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         inline: true,
       },
       {
-        name: t('fields.status_title', {
+        name: t('field.status_title', {
           //'Service Status'
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('fields.status_link', {
+        value: t('field.status_link', {
           //'[Status](https://xp-bot.net/status)'
           lng: 'en',
           ns: 'about_command',
@@ -119,13 +119,19 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     await interaction.reply({
       embeds: [
         aboutInfoEmbed.setFooter({
-          text: t('footer.response_shard_company_info', {
+          text: `${t('footer.response_time_n', {
             lng: 'en',
             ns: 'about_command',
             response: Date.now() - interaction.createdTimestamp,
+          })}, ${t('footer.shard_n', {
+            lng: 'en',
+            ns: 'about_command',
             shard: interaction.guild.shardId + 1,
+          })}, ${t('footer.company_n', {
+            lng: 'en',
+            ns: 'about_command',
             company: 'namespace.media',
-          }),
+          })}`,
         }),
       ],
 
