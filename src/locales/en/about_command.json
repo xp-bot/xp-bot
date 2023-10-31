@@ -3,15 +3,13 @@
     "description": "Get information about XP.",
     "name": "about"
   },
-  "title": {
-    "title": "Reimagine your Community"
-  },
-  "fields": {
+  "title": "Reimagine your Community",
+  "field": {
     "summary_title": "Top-Tier Leveling Solution",
     "summary_description": "Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.",
 
     "server_support_title": "Join our Server",
-    "fields.server_support_link": "[Join XP]({{link}})",
+    "server_support_link": "[Join XP]({{link}})",
 
     "vote_title": "Vote for XP!",
     "vote_link": "[top.gg]({{link}})",
@@ -20,6 +18,8 @@
     "status_link": "[Status]({{link}})"
   },
   "footer": {
-    "response_shard_company_info": "Response time: {{response}}ms • Shard: {{shard}} • © {{company}}"
+    "response_time_n": "Response time: {{response}}ms",
+    "shard_n": "Shard: {{shard}}",
+    "company_n": "by {{company}}"
   }
 }
