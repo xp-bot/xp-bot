@@ -7,7 +7,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   const userId =
     interaction.options.getUser('user', false)?.id || interaction?.user?.id;
   const guildId = interaction?.guildId;
-  if (!guildId) throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
+  if (guildId) throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
   if (!userId) throw new XPError(XPErrorType.INTERACTION_USER_UNRESOLVABLE);
 
   interaction.reply(
