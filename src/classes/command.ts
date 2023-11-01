@@ -10,11 +10,10 @@ import {
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import { t } from 'i18next';
-import { noop } from 'lodash';
+import { forEach, noop } from 'lodash';
 
 type slashCommandBuilderData =
   | SlashCommandBuilder
-  | SlashCommandSubcommandsOnlyBuilder
   | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
 
 export default class Command {
@@ -37,7 +36,7 @@ export default class Command {
   getRegistratorData = () => {
     const fallbackString = `${this.slashCommand.name} command`;
     const sanatisedCommandName = sanatiseCommandName(this.slashCommand.name);
-    return this.slashCommand
+    this.slashCommand
       .setDescription(
         t(
           [
@@ -84,6 +83,8 @@ export default class Command {
           },
         ),
       });
+
+    return this.slashCommand;
   };
 
   execute = async (interaction: Interaction) => {

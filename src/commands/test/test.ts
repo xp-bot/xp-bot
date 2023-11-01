@@ -1,6 +1,6 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import Command from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   if (true) throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);

@@ -1,6 +1,8 @@
 export enum XPErrorType {
   INTERACTION_GUILD_UNRESOLVABLE = 'interaction_guild_unresolvable',
   INTERACTION_USER_UNRESOLVABLE = 'interaction_user_unresolvable',
+
+  API_GUILD_MEMBER_UPDATE = 'api_guild_member_update',
 }
 
 export const XPErrorTypeDetails: Record<
@@ -17,16 +19,22 @@ export const XPErrorTypeDetails: Record<
     description:
       'We were unable to resolve the user while trying to execute the requested action.',
   },
+
+  [XPErrorType.API_GUILD_MEMBER_UPDATE]: {
+    title: 'API Error',
+    description:
+      'An error occurred while trying to update your settings. Please try again later.',
+  },
 };
 
 export default class XPError extends Error {
-  details?: string[];
+  legacyError?: Error;
   title: string;
   description: string;
-  constructor(type: XPErrorType, details?: string[]) {
+  constructor(type: XPErrorType, error?: Error) {
     super(type);
     this.title = XPErrorTypeDetails[type].title;
     this.description = XPErrorTypeDetails[type].description;
-    this.details = details;
+    this.legacyError = error;
   }
 }

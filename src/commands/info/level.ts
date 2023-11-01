@@ -1,6 +1,3 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
-import { t } from 'i18next';
-import { noop } from 'lodash';
 import api from '../../api';
 import Command from '../../classes/command';
 import defaultEmbed, {
@@ -8,6 +5,9 @@ import defaultEmbed, {
 } from '../../helpers/messaging/default-embed';
 import formatNumber from '../../helpers/numbers/format-number';
 import getRequiredXp from '../../helpers/numbers/get-required-xp';
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { t } from 'i18next';
+import { noop } from 'lodash';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   if (!interaction.guildId || !interaction.user.id) return;
@@ -63,36 +63,24 @@ export default new Command(
       .setName('level')
       .setDescription('The level to check the required xp for.')
       .setNameLocalizations({
-        de: t(['command_info.option.level.name', 'level'], {
+        de: t('command_info.option.level.name', {
           ns: 'level_command',
           lng: 'de',
         }),
-        'en-US': t(['command_info.option.level.name', 'level'], {
+        'en-US': t('command_info.option.level.name', {
           ns: 'level_command',
           lng: 'en',
         }),
       })
       .setDescriptionLocalizations({
-        de: t(
-          [
-            'command_info.option.level.description',
-            'The level to check the required xp for.',
-          ],
-          {
-            ns: 'level_command',
-            lng: 'de',
-          },
-        ),
-        'en-US': t(
-          [
-            'command_info.option.level.description',
-            'The level to check the required xp for.',
-          ],
-          {
-            ns: 'level_command',
-            lng: 'en',
-          },
-        ),
+        de: t('command_info.option.level.description', {
+          ns: 'level_command',
+          lng: 'de',
+        }),
+        'en-US': t('command_info.option.level.description', {
+          ns: 'level_command',
+          lng: 'en',
+        }),
       })
       .setRequired(true),
   ),

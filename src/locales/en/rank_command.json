@@ -1,1 +1,1 @@
-{"command_info":{"description":"Take a look at your RankingCard.","name":"rank","option":{"user":{"description":"The user you want to recieve the RankingCard from.","name":"goozer"}}}}
+{"command_info":{"description":"Take a look at your RankingCard.","name":"rank","option":{"user":{"description":"The user you want to recieve the RankingCard from.","name":"user"}}}}

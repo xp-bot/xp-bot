@@ -1,0 +1,22 @@
+{
+  "command_info": {
+    "description": "Decide whether you want your XP profile to be public on this server or not.",
+    "name": "incognito",
+    "option": {
+      "incognito": {
+        "description": "Enable or disable incognito on this server.",
+        "name": "incognito"
+      }
+    }
+  },
+  "description": {
+    "disabled": {
+      "info": "From now on you will be listed on the public leaderboard of this server again and the other users can also look at your ranking card.\n",
+      "title": "You have successfully **disabled** the incognito mode!"
+    },
+    "enabled": {
+      "info": "You will no longer be listed on the public leaderboard of this server and other users will no longer be able to view your ranking card.",
+      "title": "You have successfully **enabled** the incognito mode!"
+    }
+  }
+}
