@@ -8,16 +8,22 @@
     "summary_description": "Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.",
 
     "server_support_title": "Join our Server",
-    "server_support_link": "[Join XP]",
+    "server_support_description": "Join XP",
 
     "vote_title": "Vote for XP!",
 
     "status_title": "Service Status",
-    "status_link": "[Status]"
+    "status_description": "Status"
   },
   "footer": {
     "response_time_n": "Response time: {{response}}ms",
     "shard_n": "Shard: {{shard}}",
     "by_company": "by {{company}}"
+  },
+  "button": {
+    "dashboard": "Server Dashboard",
+    "account_settings": "Account Settings",
+    "premium": "Premium",
+    "privacy_policy": "Privacy Policy"
   }
 }

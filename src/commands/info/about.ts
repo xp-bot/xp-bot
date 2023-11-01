@@ -10,6 +10,7 @@ import defaultEmbed, {
   DefaultEmbedType,
 } from '../../helpers/messaging/default-embed';
 import { t } from 'i18next';
+import XPError from '../../classes/xp-error';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   if (!interaction.guildId || !interaction.user.id || !interaction.guild) {
@@ -17,8 +18,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       content: 'Invalid interaction.',
       ephemeral: true,
     });
-    // TODO: Error Handling
-    return;
+    throw new XPError('Failed to send /about embed');
   }
 
   const aboutInfoEmbed = defaultEmbed(DefaultEmbedType.NORMAL)
@@ -43,7 +43,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('field.server_link', {
+        value: t('field.server_description', {
           //'[Join XP](https://discord.com/invite/ccTAnzw)'
           lng: 'en',
           ns: 'about_command',
@@ -65,7 +65,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('field.status_link', {
+        value: t('field.status_description', {
           //'[Status](https://xp-bot.net/status)'
           lng: 'en',
           ns: 'about_command',
@@ -75,25 +75,49 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     );
 
   const dashboardButton = new ButtonBuilder()
-    .setLabel('Server Dashboard')
+    .setLabel(
+      t('button.dashboard', {
+        // Server Dashboard
+        lng: 'en',
+        ns: 'about_command',
+      }),
+    )
     .setStyle(ButtonStyle.Link)
     .setEmoji('🛠️')
     .setURL(`https://xp-bot.net/servers/${interaction.guildId}`);
 
   const accountSettingsButton = new ButtonBuilder()
-    .setLabel('Account Settings')
+    .setLabel(
+      t('button.account_settings', {
+        // Account Settings
+        lng: 'en',
+        ns: 'about_command',
+      }),
+    )
     .setStyle(ButtonStyle.Link)
     .setEmoji('🙋')
     .setURL('https://xp-bot.net/me');
 
   const premiumButton = new ButtonBuilder()
-    .setLabel('Premium')
+    .setLabel(
+      t('button.premium', {
+        // Premium
+        lng: 'en',
+        ns: 'about_command',
+      }),
+    )
     .setStyle(ButtonStyle.Link)
     .setEmoji('👑')
     .setURL('https://xp-bot.net/premium');
 
   const privacyPolicyButton = new ButtonBuilder()
-    .setLabel('Privacy Policy')
+    .setLabel(
+      t('button.privacy_policy', {
+        // Privacy Policy
+        lng: 'en',
+        ns: 'about_command',
+      }),
+    )
     .setStyle(ButtonStyle.Link)
     .setEmoji('🔖')
     .setURL('https://xp-bot.net/privacy');
@@ -116,11 +140,11 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
             lng: 'en',
             ns: 'about_command',
             response: Date.now() - interaction.createdTimestamp,
-          })}, ${t('footer.shard_n', {
+          })} • ${t('footer.shard_n', {
             lng: 'en',
             ns: 'about_command',
             shard: interaction.guild.shardId + 1,
-          })}, ${t('footer.by_company', {
+          })} • ${t('footer.by_company', {
             lng: 'en',
             ns: 'about_command',
             company: 'namespace.media',
@@ -131,8 +155,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       components: [aboutActionRow, aboutActionRow2],
     });
   } catch (error) {
-    console.error(error);
-    // TODO: Error Handling
+    throw new XPError('Failed to send /about embed with buttons in line 136');
   }
 };
 
