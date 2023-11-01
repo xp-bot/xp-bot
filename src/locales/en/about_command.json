@@ -8,12 +8,12 @@
     "summary_description": "Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.",
 
     "server_support_title": "Join our Server",
-    "server_support_link": "[Join XP](https://discord.com/invite/ccTAnzw)",
+    "server_support_link": "[Join XP]",
 
     "vote_title": "Vote for XP!",
 
     "status_title": "Service Status",
-    "status_link": "[Status](https://xp-bot.net/status)"
+    "status_link": "[Status]"
   },
   "footer": {
     "response_time_n": "Response time: {{response}}ms",
