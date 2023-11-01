@@ -1,0 +1,590 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+      "title": "OpenAPI Spec for the DB Connector 7 types",
+      "version": "1.0.0",
+      "description": "This is the API documentation for the DB Connector 7 typings.",
+      "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+      },
+      "contact": {
+          "name": "namespace.media",
+          "url": "https://discord.xp-bot.net/",
+          "email": "contact@namespace.media"
+      }
+  },
+  "paths": {},
+  "components": {
+      "schemas": {
+          "Guild": {
+              "type": "object",
+              "required": [
+                  "values",
+                  "modules",
+                  "logs",
+                  "ignored",
+                  "boosts",
+                  "levelroles",
+                  "announce",
+                  "leaderboard_message"
+              ],
+              "properties": {
+                  "values": {
+                      "type": "object",
+                      "required": [
+                          "messagexp",
+                          "voicexp",
+                          "reactionxp",
+                          "lootXP",
+                          "fishXP",
+                          "rollXP",
+                          "triviaxp",
+                          "maximumdailyxp",
+                          "maximumlevel",
+                          "messagecooldown",
+                          "gamecooldown",
+                          "triviacooldown",
+                          "req-message-length",
+                          "voicejoincooldown"
+                      ],
+                      "properties": {
+                          "messagexp": {
+                              "type": "number"
+                          },
+                          "voicexp": {
+                              "type": "number"
+                          },
+                          "reactionxp": {
+                              "type": "number"
+                          },
+                          "lootXP": {
+                              "type": "number"
+                          },
+                          "fishXP": {
+                              "type": "number"
+                          },
+                          "rollXP": {
+                              "type": "number"
+                          },
+                          "triviaxp": {
+                              "type": "number"
+                          },
+                          "maximumdailyxp": {
+                              "type": "number"
+                          },
+                          "maximumlevel": {
+                              "type": "number"
+                          },
+                          "messagecooldown": {
+                              "type": "number"
+                          },
+                          "gamecooldown": {
+                              "type": "number"
+                          },
+                          "triviacooldown": {
+                              "type": "number"
+                          },
+                          "req-message-length": {
+                              "type": "number"
+                          },
+                          "voicejoincooldown": {
+                              "type": "number"
+                          }
+                      }
+                  },
+                  "modules": {
+                      "type": "object",
+                      "required": [
+                          "messagexp",
+                          "voicexp",
+                          "reactionxp",
+                          "ignoreafk",
+                          "autonick",
+                          "autonickuseprefix",
+                          "autonickshowstring",
+                          "leaderboard",
+                          "singlerankrole",
+                          "removereachedlevelroles",
+                          "maximumlevel",
+                          "resetonleave",
+                          "enablecommandsinthreads",
+                          "games",
+                          "trivia"
+                      ],
+                      "properties": {
+                          "messagexp": {
+                              "type": "boolean"
+                          },
+                          "voicexp": {
+                              "type": "boolean"
+                          },
+                          "reactionxp": {
+                              "type": "boolean"
+                          },
+                          "ignoreafk": {
+                              "type": "boolean"
+                          },
+                          "autonick": {
+                              "type": "boolean"
+                          },
+                          "autonickuseprefix": {
+                              "type": "boolean"
+                          },
+                          "autonickshowstring": {
+                              "type": "boolean"
+                          },
+                          "leaderboard": {
+                              "type": "boolean"
+                          },
+                          "singlerankrole": {
+                              "type": "boolean"
+                          },
+                          "removereachedlevelroles": {
+                              "type": "boolean"
+                          },
+                          "maximumlevel": {
+                              "type": "boolean"
+                          },
+                          "resetonleave": {
+                              "type": "boolean"
+                          },
+                          "enablecommandsinthreads": {
+                              "type": "boolean"
+                          },
+                          "games": {
+                              "type": "boolean"
+                          },
+                          "trivia": {
+                              "type": "boolean"
+                          }
+                      }
+                  },
+                  "logs": {
+                      "type": "object",
+                      "required": [
+                          "voicetime",
+                          "exceptions",
+                          "levelup"
+                      ],
+                      "properties": {
+                          "voicetime": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          },
+                          "exceptions": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          },
+                          "levelup": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          }
+                      }
+                  },
+                  "ignored": {
+                      "type": "object",
+                      "required": [
+                          "roles",
+                          "channels",
+                          "categories"
+                      ],
+                      "properties": {
+                          "roles": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          },
+                          "channels": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          },
+                          "categories": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "boosts": {
+                      "type": "object",
+                      "required": [
+                          "roles",
+                          "channels"
+                      ],
+                      "properties": {
+                          "roles": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "required": [
+                                      "id",
+                                      "percentage"
+                                  ],
+                                  "properties": {
+                                      "id": {
+                                          "type": "string"
+                                      },
+                                      "percentage": {
+                                          "type": "number"
+                                      }
+                                  }
+                              }
+                          },
+                          "channels": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "required": [
+                                      "id",
+                                      "percentage"
+                                  ],
+                                  "properties": {
+                                      "id": {
+                                          "type": "string"
+                                      },
+                                      "percentage": {
+                                          "type": "number"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "levelroles": {
+                      "type": "array",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "id",
+                              "level"
+                          ],
+                          "properties": {
+                              "id": {
+                                  "type": "string"
+                              },
+                              "level": {
+                                  "type": "number"
+                              }
+                          }
+                      }
+                  },
+                  "announce": {
+                      "type": "object",
+                      "required": [
+                          "current",
+                          "channelID",
+                          "message",
+                          "ping",
+                          "conditions"
+                      ],
+                      "properties": {
+                          "current": {
+                              "type": "boolean"
+                          },
+                          "channelID": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          },
+                          "message": {
+                              "type": "string"
+                          },
+                          "ping": {
+                              "type": "boolean"
+                          },
+                          "disappearafter": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          },
+                          "conditions": {
+                              "type": "object",
+                              "required": [
+                                  "onlyOnNewRole"
+                              ],
+                              "properties": {
+                                  "onlyOnNewRole": {
+                                      "type": "boolean"
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "leaderboard_message": {
+                      "type": "object",
+                      "required": [
+                          "enabled",
+                          "messageID",
+                          "channelID"
+                      ],
+                      "properties": {
+                          "enabled": {
+                              "type": "boolean"
+                          },
+                          "messageID": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          },
+                          "channelID": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          }
+                      }
+                  },
+                  "premiumUser": {
+                      "type": [
+                          "string",
+                          "null"
+                      ]
+                  },
+                  "voteFreeUser": {
+                      "type": [
+                          "string",
+                          "null"
+                      ]
+                  },
+                  "shard": {
+                      "type": [
+                          "number",
+                          "null"
+                      ]
+                  }
+              }
+          },
+          "GuildMemberData": {
+              "type": "object",
+              "properties": {
+                  "username": {
+                      "type": "string"
+                  },
+                  "avatar": {
+                      "type": "string"
+                  },
+                  "banner": {
+                      "type": "string"
+                  }
+              }
+          },
+          "GuildMember": {
+              "type": "object",
+              "required": [
+                  "xp",
+                  "settings",
+                  "timestamps",
+                  "streaks",
+                  "userData"
+              ],
+              "properties": {
+                  "xp": {
+                      "type": "number"
+                  },
+                  "settings": {
+                      "type": "object",
+                      "required": [
+                          "incognito"
+                      ],
+                      "properties": {
+                          "incognito": {
+                              "type": "boolean"
+                          }
+                      }
+                  },
+                  "timestamps": {
+                      "type": "object",
+                      "required": [
+                          "message_cooldown",
+                          "game_daily",
+                          "game_trivia",
+                          "game_loot",
+                          "game_fish",
+                          "game_roll"
+                      ],
+                      "properties": {
+                          "message_cooldown": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          },
+                          "game_daily": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          },
+                          "game_trivia": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          },
+                          "game_loot": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          },
+                          "game_fish": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          },
+                          "game_roll": {
+                              "type": [
+                                  "number",
+                                  "null"
+                              ]
+                          }
+                      }
+                  },
+                  "streaks": {
+                      "type": "object",
+                      "required": [
+                          "game_daily",
+                          "game_trivia"
+                      ],
+                      "properties": {
+                          "game_daily": {
+                              "type": "number"
+                          },
+                          "game_trivia": {
+                              "type": "number"
+                          }
+                      }
+                  },
+                  "userData": {
+                      "$ref": "#/components/schemas/GuildMemberData"
+                  }
+              }
+          },
+          "User": {
+              "type": "object",
+              "required": [
+                  "badges",
+                  "titles",
+                  "settings",
+                  "timestamps"
+              ],
+              "properties": {
+                  "badges": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  },
+                  "titles": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  },
+                  "settings": {
+                      "type": "object",
+                      "required": [
+                          "background"
+                      ],
+                      "properties": {
+                          "background": {
+                              "type": "object",
+                              "required": [
+                                  "bg",
+                                  "blur",
+                                  "custom",
+                                  "canvas"
+                              ],
+                              "properties": {
+                                  "bg": {
+                                      "type": "number"
+                                  },
+                                  "blur": {
+                                      "type": "number"
+                                  },
+                                  "custom": {
+                                      "type": "boolean"
+                                  },
+                                  "canvas": {
+                                      "type": "boolean"
+                                  }
+                              }
+                          },
+                          "language": {
+                              "type": [
+                                  "string",
+                                  "null"
+                              ]
+                          }
+                      }
+                  },
+                  "timestamps": {
+                      "type": "object",
+                      "required": [
+                          "message_cooldown",
+                          "game_daily",
+                          "game_trivia",
+                          "game_loot",
+                          "game_fish",
+                          "game_roll"
+                      ],
+                      "additionalProperties": {
+                          "type": [
+                              "string",
+                              "null"
+                          ]
+                      }
+                  }
+              }
+          },
+          "UserPremium": {
+              "type": "object",
+              "required": [
+                  "userPremium",
+                  "serverPremium",
+                  "servers",
+                  "voteFreeCount",
+                  "voteFreeServers"
+              ],
+              "properties": {
+                  "userPremium": {
+                      "type": "boolean"
+                  },
+                  "serverPremium": {
+                      "type": "number"
+                  },
+                  "servers": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  },
+                  "voteFreeCount": {
+                      "type": "number"
+                  },
+                  "voteFreeServers": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}

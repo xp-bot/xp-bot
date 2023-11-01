@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"command_info":{"description":"Überprüfen Sie die erforderlichen XP, um ein bestimmtes Level zu erreichen.","name":"level"},"description":{"n_away_from_level":"Du bist ** {{xp}} xp** davon entfernt, ** $t(level_n, {\"level\": {{level}} , \"ns\": \"global\" }) ** zu erreichen.","reached_n_of_level":"Sie haben {{percent}} % von $t(level_n, {\"level\": {{level}} , \"ns\": \"global\" }) erreicht."}}
+=======
+{"command_info":{"description":"Überprüfen Sie die erforderlichen XP, um ein bestimmtes Level zu erreichen.","name":"level","option":{"level":{"description":"Das Level, für das die erforderlichen XP überprüft werden sollen.","name":"Ebene"}}},"description":{"n_away_from_level":"Du bist ** {{xp}} xp** davon entfernt, ** $t(level_n, {\"level\": {{level}} , \"ns\": \"global\" }) ** zu erreichen.","reached_n_of_level":"Sie haben {{percent}} % von $t(level_n, {\"level\": {{level}} , \"ns\": \"global\" }) erreicht."}}
+>>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
