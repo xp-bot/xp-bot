@@ -1,9 +1,12 @@
+export enum XPErrorType {
+  INTERACTION_GUILD_UNRESOLVABLE = 'INTERACTION_GUILD_UNRESOLVABLE',
+  INTERACTION_USER_UNRESOLVABLE = 'INTERACTION_USER_UNRESOLVABLE',
+}
+
 export default class XPError extends Error {
-  status: number;
   details?: string[];
-  constructor(message: string, status?: number, details?: string[]) {
-    super(message);
-    this.status = status || 500;
+  constructor(type: XPErrorType, details?: string[]) {
+    super(type);
     this.details = details;
   }
 }

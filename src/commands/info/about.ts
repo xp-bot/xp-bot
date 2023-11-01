@@ -10,7 +10,7 @@ import defaultEmbed, {
   DefaultEmbedType,
 } from '../../helpers/messaging/default-embed';
 import { t } from 'i18next';
-import XPError from '../../classes/xp-error';
+import XPError, { XPErrorType } from '../../classes/xp-error';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   if (!interaction.guildId || !interaction.user.id || !interaction.guild) {
@@ -18,7 +18,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       content: 'Invalid interaction.',
       ephemeral: true,
     });
-    throw new XPError('Failed to send /about embed');
+    throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
   }
 
   const aboutInfoEmbed = defaultEmbed(DefaultEmbedType.NORMAL)
@@ -155,7 +155,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       components: [aboutActionRow, aboutActionRow2],
     });
   } catch (error) {
-    throw new XPError('Failed to send /about embed with buttons in line 136');
+    throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
   }
 };
 
