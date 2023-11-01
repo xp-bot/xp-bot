@@ -1,3 +1,8 @@
+import XPError from './xp-error';
+import discordClient from '../clients/discord-client';
+import sanatiseCommandName from '../helpers/command-handling/sanatise-command-name';
+import generateErrorEmbed from '../helpers/error-handling/generate-error-embed';
+import getSanatisedStacktrace from '../helpers/error-handling/get-sanatised-stacktrace';
 import {
   ChatInputCommandInteraction,
   Interaction,
@@ -6,9 +11,6 @@ import {
 } from 'discord.js';
 import { t } from 'i18next';
 import { noop } from 'lodash';
-import discordClient from '../clients/discord-client';
-import sanatiseCommandName from '../helpers/command-handling/sanatise-command-name';
-import XPError from './xp-error';
 
 type slashCommandBuilderData =
   | SlashCommandBuilder
@@ -86,24 +88,20 @@ export default class Command {
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
-    console.log(`Recieved command request [${this.slashCommand.name}]`);
+    console.debug(`Recieved command request [${this.slashCommand.name}]`);
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
-        console.log(
+        console.debug(
           `Successfully executed command [${this.slashCommand.name}]`,
         );
       })
       .catch((error: XPError) => {
-        console.error(`${error.message}.`, [
-          { command: this.slashCommand.name },
-          ...(error.details || []),
-        ]);
-        interaction
-          .reply({
-            content: 'An error occured while executing this command.',
-            ephemeral: true,
-          })
-          .catch(noop);
+        console.error(
+          `${error.message} - [${
+            this.slashCommand.name
+          }] - '${getSanatisedStacktrace(error)}'`,
+        );
+        interaction.reply(generateErrorEmbed(error)).catch(noop);
       });
   };
 

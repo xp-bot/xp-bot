@@ -1,5 +1,5 @@
-import apiAxios from '../clients/api-axios';
 import { Guild, GuildMember, User } from './generated';
+import apiAxios from '../clients/api-axios';
 
 export default {
   guild: {

@@ -26,8 +26,28 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'lodash', 'prettier'],
+  plugins: ['@typescript-eslint', 'lodash', 'prettier', 'import'],
   rules: {
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'index',
+          'sibling',
+          'parent',
+          'internal',
+          'external',
+          'builtin',
+          'object',
+          'type',
+        ],
+        alphabetize: {
+          order:
+            'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
+          caseInsensitive: true /* ignore case. Options: [true, false] */,
+        },
+      },
+    ],
     'prettier/prettier': 'error',
     // indent: ['error', 2],
     'max-depth': ['error', 3],

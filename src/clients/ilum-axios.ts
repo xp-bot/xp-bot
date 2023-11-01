@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from 'axios';
 import { axiosIlumApp } from '../helpers/api/axios-app';
+import { AxiosRequestConfig } from 'axios';
 
 export default async <Body>(route: string, options: AxiosRequestConfig) => {
   try {

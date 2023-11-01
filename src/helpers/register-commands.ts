@@ -1,13 +1,12 @@
-import { Collection } from 'discord.js';
-import dotenv from 'dotenv';
-import fs from 'fs';
-import { endsWith, filter, size } from 'lodash';
-import path from 'path';
 import Command from '../classes/command';
 import discordClient from '../clients/discord-client';
-dotenv.config();
-
+import { Collection } from 'discord.js';
 import { REST, Routes } from 'discord.js';
+import dotenv from 'dotenv';
+import { endsWith, filter, size } from 'lodash';
+import fs from 'fs';
+import path from 'path';
+dotenv.config();
 
 const TOKEN_ = process.env.TOKEN || '';
 const APPLICATION_ID_ = process.env.APPLICATION_ID || '';
