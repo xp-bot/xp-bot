@@ -22,7 +22,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   }
 
   const aboutInfoEmbed = defaultEmbed(DefaultEmbedType.NORMAL)
-    .setTitle(`${t('title', { lng: 'en', ns: 'about_command' })}}`)
+    .setTitle('Reimagine your Community')
     .addFields(
       {
         name: t('field.summary_title', {
@@ -47,7 +47,6 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           //'[Join XP](https://discord.com/invite/ccTAnzw)'
           lng: 'en',
           ns: 'about_command',
-          link: 'https://discord.com/invite/ccTAnzw',
         }),
         inline: true,
       },
@@ -57,12 +56,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('field.vote_link', {
-          //'[top.gg](https://top.gg/bot/706935674800177193)'
-          lng: 'en',
-          ns: 'about_command',
-          link: 'https://top.gg/bot/706935674800177193',
-        }),
+        value: '[top.gg](https://top.gg/bot/706935674800177193)',
         inline: true,
       },
       {
@@ -75,7 +69,6 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           //'[Status](https://xp-bot.net/status)'
           lng: 'en',
           ns: 'about_command',
-          link: 'https://status.xp-bot.net',
         }),
         inline: true,
       },
@@ -127,7 +120,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
             lng: 'en',
             ns: 'about_command',
             shard: interaction.guild.shardId + 1,
-          })}, ${t('footer.company_n', {
+          })}, ${t('footer.by_company', {
             lng: 'en',
             ns: 'about_command',
             company: 'namespace.media',

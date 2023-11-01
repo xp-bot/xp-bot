@@ -3,23 +3,21 @@
     "description": "Get information about XP.",
     "name": "about"
   },
-  "title": "Reimagine your Community",
   "field": {
     "summary_title": "Top-Tier Leveling Solution",
     "summary_description": "Elevate your Community to the next Level with Top-Tier Leveling, endless Customisability and more.",
 
     "server_support_title": "Join our Server",
-    "server_support_link": "[Join XP]({{link}})",
+    "server_support_link": "[Join XP](https://discord.com/invite/ccTAnzw)",
 
     "vote_title": "Vote for XP!",
-    "vote_link": "[top.gg]({{link}})",
 
     "status_title": "Service Status",
-    "status_link": "[Status]({{link}})"
+    "status_link": "[Status](https://xp-bot.net/status)"
   },
   "footer": {
     "response_time_n": "Response time: {{response}}ms",
     "shard_n": "Shard: {{shard}}",
-    "company_n": "by {{company}}"
+    "by_company": "by {{company}}"
   }
 }
