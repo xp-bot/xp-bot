@@ -5,10 +5,7 @@ import {
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import { t } from 'i18next';
-<<<<<<< HEAD
-=======
 import { noop } from 'lodash';
->>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
 import discordClient from '../clients/discord-client';
 import sanatiseCommandName from '../helpers/command-handling/sanatise-command-name';
 import XPError from './xp-error';
@@ -37,22 +34,6 @@ export default class Command {
 
   getRegistratorData = () => {
     const fallbackString = `${this.slashCommand.name} command`;
-<<<<<<< HEAD
-    this.slashCommand
-      .setDescription(
-        t(['command_info.description', fallbackString], {
-          ns: `${this.slashCommand.name}_command`,
-          lng: 'en',
-        }),
-      )
-      .setNameLocalizations({
-        de: t(['command_info.name', this.slashCommand.name], {
-          ns: `${this.slashCommand.name}_command`,
-          lng: 'de',
-        }),
-        'en-US': t(['command_info.name', this.slashCommand.name], {
-          ns: `${this.slashCommand.name}_command`,
-=======
     const sanatisedCommandName = sanatiseCommandName(this.slashCommand.name);
     return this.slashCommand
       .setDescription(
@@ -74,7 +55,6 @@ export default class Command {
         }),
         'en-US': t(['command_info.name', this.slashCommand.name], {
           ns: `${sanatisedCommandName}_command`,
->>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
           lng: 'en',
         }),
       })
@@ -86,11 +66,7 @@ export default class Command {
             fallbackString,
           ],
           {
-<<<<<<< HEAD
-            ns: `${this.slashCommand.name}_command`,
-=======
             ns: `${sanatisedCommandName}_command`,
->>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
             lng: 'de',
           },
         ),
@@ -101,11 +77,7 @@ export default class Command {
             fallbackString,
           ],
           {
-<<<<<<< HEAD
-            ns: `${this.slashCommand.name}_command`,
-=======
             ns: `${sanatisedCommandName}_command`,
->>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
             lng: 'en',
           },
         ),
@@ -114,21 +86,11 @@ export default class Command {
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
-<<<<<<< HEAD
-    console.log(
-      `[COMMAND] Recieved command request [${this.slashCommand.name}]`,
-    );
-    this.executeCallback(interaction as ChatInputCommandInteraction)
-      .then(() => {
-        console.log(
-          `[COMMAND] Successfully executed command [${this.slashCommand.name}]`,
-=======
     console.log(`Recieved command request [${this.slashCommand.name}]`);
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
         console.log(
           `Successfully executed command [${this.slashCommand.name}]`,
->>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
         );
       })
       .catch((error: XPError) => {
