@@ -58,16 +58,6 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-<<<<<<< HEAD
-  new SlashCommandBuilder()
-    .setName('level')
-    .addIntegerOption((option) =>
-      option
-        .setName('level')
-        .setDescription('The level to check the required xp for.')
-        .setRequired(true),
-    ),
-=======
   new SlashCommandBuilder().setName('level').addIntegerOption((option) =>
     option
       .setName('level')
@@ -106,6 +96,5 @@ export default new Command(
       })
       .setRequired(true),
   ),
->>>>>>> 694fdef77b37237d452c560a0983a4a20a526f14
   execute,
 );

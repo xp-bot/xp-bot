@@ -15,7 +15,6 @@ import XPError, { XPErrorType } from '../../classes/xp-error';
 const execute = async (interaction: ChatInputCommandInteraction) => {
   if (!interaction.guildId || !interaction.guild) {
     throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
-
   } else if (!interaction.user.id) {
     throw new XPError(XPErrorType.INTERACTION_USER_UNRESOLVABLE);
   }

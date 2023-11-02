@@ -12,7 +12,7 @@ const manager = new ShardingManager(path.join(__dirname, './bot.ts'), {
 });
 
 manager.on('shardCreate', (shard) =>
-  console.log(`Launched shard ${shard.id || 0 + 1}`)
+  console.log(`Launched shard ${shard.id || 0 + 1}`),
 );
 
 manager.spawn();
