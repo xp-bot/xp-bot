@@ -13,12 +13,11 @@ import { t } from 'i18next';
 import XPError, { XPErrorType } from '../../classes/xp-error';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
-  if (!interaction.guildId || !interaction.user.id || !interaction.guild) {
-    await interaction.reply({
-      content: 'Invalid interaction.',
-      ephemeral: true,
-    });
+  if (!interaction.guildId || !interaction.guild) {
     throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
+
+  } else if (!interaction.user.id) {
+    throw new XPError(XPErrorType.INTERACTION_USER_UNRESOLVABLE);
   }
 
   const aboutInfoEmbed = defaultEmbed(DefaultEmbedType.NORMAL)
@@ -43,11 +42,11 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('field.server_description', {
+        value: `[${t('field.server_description', {
           //'[Join XP](https://discord.com/invite/ccTAnzw)'
           lng: 'en',
           ns: 'about_command',
-        }),
+        })}](https://discord.com/invite/ccTAnzw)`,
         inline: true,
       },
       {
@@ -65,11 +64,11 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
           lng: 'en',
           ns: 'about_command',
         }),
-        value: t('field.status_description', {
+        value: `[${t('field.status_description', {
           //'[Status](https://xp-bot.net/status)'
           lng: 'en',
           ns: 'about_command',
-        }),
+        })}](https://xp-bot.net/status)`,
         inline: true,
       },
     );
@@ -155,7 +154,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       components: [aboutActionRow, aboutActionRow2],
     });
   } catch (error) {
-    throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
+    throw new XPError(XPErrorType.INTERACTION_USER_UNRESOLVABLE);
   }
 };
 
