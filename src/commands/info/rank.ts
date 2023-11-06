@@ -1,7 +1,7 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
-import { t } from 'i18next';
 import Command from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { t } from 'i18next';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   const userId =

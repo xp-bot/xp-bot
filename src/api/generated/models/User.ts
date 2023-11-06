@@ -4,8 +4,8 @@
 /* eslint-disable */
 
 export type User = {
-    badges: Array<string>;
-    titles: Array<string>;
+    badges: Array<'xpboost' | 'xpbughunter' | 'xpdev' | 'xpfeaturesmith' | 'xppremium' | 'xpsupport' | 'xptranslator'>;
+    titles: Array<'xpdev' | 'xpheaddev' | 'xppremium' | 'xpsupport'>;
     settings: {
         background: {
             bg: number;

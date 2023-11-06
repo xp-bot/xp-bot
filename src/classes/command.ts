@@ -7,10 +7,9 @@ import {
   ChatInputCommandInteraction,
   Interaction,
   SlashCommandBuilder,
-  SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
 import { t } from 'i18next';
-import { forEach, noop } from 'lodash';
+import { noop } from 'lodash';
 
 type slashCommandBuilderData =
   | SlashCommandBuilder

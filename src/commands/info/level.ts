@@ -1,5 +1,6 @@
-import api from '../../api';
+import { GuildMemberService } from '../../api/generated';
 import Command from '../../classes/command';
+import XPError, { XPErrorType } from '../../classes/xp-error';
 import defaultEmbed, {
   DefaultEmbedType,
 } from '../../helpers/messaging/default-embed';
@@ -10,23 +11,27 @@ import { t } from 'i18next';
 import { noop } from 'lodash';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
+  const guildMemberService_ = GuildMemberService;
+
   if (!interaction.guildId || !interaction.user.id) return;
 
   const level = interaction.options.getInteger('level');
 
-  const guildMember = await api.guildMember.getGuildMember(
-    interaction.guildId,
-    interaction.user.id,
-  );
-  if (!guildMember.success) return;
+  const guildMember = await guildMemberService_
+    .getGuildMember({
+      guildId: interaction.guildId,
+      userId: interaction.user.id,
+    })
+    .catch((e) => {
+      throw new XPError(XPErrorType.API_GUILD_MEMBER_FETCH, e);
+    });
 
-  // TODO: Error Handling
   if (!level) {
-    return;
+    throw new XPError(XPErrorType.INTERACTION_OPTIONS_INVALID);
   }
 
   const neededXp = getRequiredXp(level);
-  const membersCurrentXp = guildMember.content.xp;
+  const membersCurrentXp = guildMember.xp;
   const remainingXp = neededXp - membersCurrentXp;
   const msg = defaultEmbed(DefaultEmbedType.NORMAL).setTitle(
     `${t('level_n', { level })} = ${formatNumber(neededXp)}xp`,

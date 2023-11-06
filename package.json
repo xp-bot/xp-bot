@@ -11,7 +11,8 @@
     "build": "yarn lint && tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "generate-services": "openapi --input ./docs.json --output ./src/api/generated --client axios --useOptions",
+    "generate-services": "curl http://xp-bot.net:3001/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/generator-overrides/request.ts --client axios --useOptions",
+    "generate-services:local": "curl http://localhost:3001/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/overrides/request.ts --client axios --useOptions",
     "translate": "i18nexus pull -k $(grep I18N_TOKEN .env | cut -d '=' -f2) -p src/locales"
   },
   "dependencies": {
