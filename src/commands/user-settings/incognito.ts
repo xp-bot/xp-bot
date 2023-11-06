@@ -1,4 +1,4 @@
-import api from '../../api';
+import { GuildMemberService } from '../../api/generated';
 import Command from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
 import defaultEmbed, {
@@ -10,6 +10,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { t } from 'i18next';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
+  const guildMemberService_ = GuildMemberService;
   const guildId = interaction.guildId;
   const userId = interaction.user.id;
 
@@ -20,10 +21,14 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   const embed = defaultEmbed(DefaultEmbedType.SUCCESS);
   const newState = interaction.options.getBoolean('incognito', true);
 
-  await api.guildMember
-    .updateGuildMember(guildId, userId, {
-      settings: {
-        incognito: newState,
+  await guildMemberService_
+    .patchGuildMember({
+      guildId,
+      userId,
+      requestBody: {
+        settings: {
+          incognito: newState,
+        },
       },
     })
     .catch((e) => {

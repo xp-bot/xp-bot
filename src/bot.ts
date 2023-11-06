@@ -1,10 +1,15 @@
-import { Events } from 'discord.js';
-import dotenv from 'dotenv';
+import { OpenAPI } from './api/generated';
 import discordClient from './clients/discord-client';
 import handlers from './handlers/discord-events';
 import customLogger from './helpers/custom-logger';
 import initI18n from './helpers/localization/init-i18n';
+import { Events } from 'discord.js';
+import dotenv from 'dotenv';
+import { trimEnd } from 'lodash';
 dotenv.config();
+
+OpenAPI.TOKEN = process.env.API_TOKEN;
+OpenAPI.BASE = trimEnd(process.env.API, '/');
 
 const main = async () => {
   customLogger();

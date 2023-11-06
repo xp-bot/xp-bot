@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Guild = {
-    values: {
+export type Partial_Guild_ = {
+    values?: {
         messagexp: number;
         voicexp: number;
         reactionxp: number;
@@ -20,7 +20,7 @@ export type Guild = {
         'req-message-length': number;
         voicejoincooldown: number;
     };
-    modules: {
+    modules?: {
         messagexp: boolean;
         voicexp: boolean;
         reactionxp: boolean;
@@ -37,17 +37,17 @@ export type Guild = {
         games: boolean;
         trivia: boolean;
     };
-    logs: {
+    logs?: {
         voicetime: boolean;
         exceptions: boolean;
         levelup: boolean;
     };
-    ignored: {
+    ignored?: {
         roles: Array<string>;
         channels: Array<string>;
         categories: Array<string>;
     };
-    boosts: {
+    boosts?: {
         roles: Array<{
             id: string;
             percentage: number;
@@ -57,11 +57,11 @@ export type Guild = {
             percentage: number;
         }>;
     };
-    levelroles: Array<{
+    levelroles?: Array<{
         id: string;
         level: number;
     }>;
-    announce: {
+    announce?: {
         current: boolean;
         channelID: number;
         message: string;
@@ -71,7 +71,7 @@ export type Guild = {
             onlyOnNewRole: boolean;
         };
     };
-    leaderboard_message: {
+    leaderboard_message?: {
         enabled: boolean;
         messageID: string | null;
         channelID: string | null;
