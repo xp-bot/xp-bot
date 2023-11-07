@@ -1,1 +1,1 @@
-{"level_n":"Level {{level}}"}
+{"a_few_seconds":"ein paar Sekunden","error":{"cooldown_hit":{"description":"Sie können diesen Befehl in {{time}} erneut verwenden.","title":"Abklingzeit ist aktiv"}},"hour_one":"{{count}} Stunde","hour_other":"{{count}} Stunden","level_n":"Level {{level}}","minute_one":"{{count}} Minute","minute_other":"{{count}} Minuten","second_one":"{{count}} Zweiter","second_other":"{{count}} Sekunden"}

@@ -5,6 +5,7 @@ export enum DefaultEmbedType {
   SUCCESS,
   INFO,
   ERROR,
+  EASTEREGG,
 }
 
 // TODO: Add XP LOGO
@@ -23,13 +24,22 @@ export default (type?: DefaultEmbedType, _enableThumbnail?: boolean) => {
     case DefaultEmbedType.ERROR:
       color = 'Red';
       break;
+    case DefaultEmbedType.EASTEREGG:
+      color = 0xdaa520;
+      break;
 
     default:
       color = 'Blurple';
       break;
   }
-  return new EmbedBuilder().setColor(color);
-  // .setThumbnail(
+  const embed = new EmbedBuilder().setColor(color);
+
+  type === DefaultEmbedType.EASTEREGG &&
+    embed.setFooter({ text: '✨ Hey! You found an easter egg!' });
+
+  // embed.setThumbnail(
   //   enableThumbnail ? process.env.LOGO : null
   // );
+
+  return embed;
 };

@@ -16,16 +16,10 @@ export default (passthrough: CommandPassthrough) => {
   // Localize command name and description
   slashCommand
     .setDescription(
-      t(
-        [
-          'command_info.description',
-          slashCommand.description || fallbackString,
-        ],
-        {
-          ns: `${sanatisedCommandName}_command`,
-          lng: 'en',
-        },
-      ),
+      t(['command_info.description', fallbackString], {
+        ns: `${sanatisedCommandName}_command`,
+        lng: 'en',
+      }),
     )
     .setNameLocalizations({
       de: t(['command_info.name', slashCommand.name], {
@@ -81,7 +75,9 @@ export default (passthrough: CommandPassthrough) => {
       o
         .setName(optionNames['en-US'])
         .setDescription(optionDescriptions['en-US'])
-        .setRequired(option.required);
+        .setRequired(option.required)
+        .setNameLocalizations(optionNames)
+        .setDescriptionLocalizations(optionDescriptions);
     switch (option.type) {
       case CommandOptionType.STRING:
         slashCommand.addStringOption(buildOptionConfiguration);

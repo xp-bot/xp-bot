@@ -5,6 +5,9 @@ export enum XPErrorType {
 
   API_GUILD_MEMBER_UPDATE = 'api_guild_member_update',
   API_GUILD_MEMBER_FETCH = 'api_guild_member_fetch',
+
+  API_GUILD_FETCH = 'api_guild_fetch',
+  API_GUILD_UPDATE = 'api_guild_update',
 }
 
 export const XPErrorTypeDetails: Record<
@@ -36,6 +39,17 @@ export const XPErrorTypeDetails: Record<
     title: 'API Error',
     description:
       'An error occurred while trying to fetch your settings. Please try again later.',
+  },
+
+  [XPErrorType.API_GUILD_FETCH]: {
+    title: 'API Error',
+    description:
+      'An error occurred while trying to fetch your server settings. Please try again later.',
+  },
+  [XPErrorType.API_GUILD_UPDATE]: {
+    title: 'API Error',
+    description:
+      'An error occurred while trying to update your server settings. Please try again later.',
   },
 };
 

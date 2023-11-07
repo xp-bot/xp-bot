@@ -1,9 +1,10 @@
-import i18n from 'i18next';
+import i18n, { InitOptions } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 
 const i18nextConfig = {
   fallbackLng: 'en',
   fallbackNS: 'global',
+  supportedLngs: ['en', 'de'],
   ns: [
     'global',
     'level_command',
@@ -14,6 +15,7 @@ const i18nextConfig = {
     'removexp_command',
     'setxp_command',
     'leaderboard_command',
+    'fish_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

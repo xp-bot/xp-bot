@@ -9,7 +9,7 @@ import { trimEnd } from 'lodash';
 dotenv.config();
 
 OpenAPI.TOKEN = process.env.API_TOKEN;
-OpenAPI.BASE = trimEnd(process.env.API, '/');
+OpenAPI.BASE = trimEnd(process.env.API_URL, '/');
 
 const main = async () => {
   customLogger();
