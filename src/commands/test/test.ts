@@ -1,8 +1,9 @@
 import Command from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
+  // eslint-disable-next-line no-constant-condition
   if (true) throw new XPError(XPErrorType.INTERACTION_GUILD_UNRESOLVABLE);
   interaction.reply({ ephemeral: true, content: 'test' });
 
@@ -11,6 +12,9 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-  new SlashCommandBuilder().setName('test').setDescription('Test command'),
+  {
+    name: 'test',
+    options: [],
+  },
   execute,
 );

@@ -10,6 +10,7 @@ const i18nextConfig = {
     'test_command',
     'rank_command',
     'incognito_command',
+    'addxp_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

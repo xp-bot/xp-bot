@@ -51,7 +51,7 @@ export default () => {
           // Using legacy .map due to typing issues
           // eslint-disable-next-line lodash/prefer-lodash-method
           body: (discordClient.commands as Collection<string, Command>).map(
-            (command) => command.getRegistratorData().toJSON(),
+            (command) => command.getRegistratorData(),
           ),
         });
       else
@@ -61,7 +61,7 @@ export default () => {
             // Using legacy .map due to typing issues
             // eslint-disable-next-line lodash/prefer-lodash-method
             body: (discordClient.commands as Collection<string, Command>).map(
-              (command) => command.getRegistratorData().toJSON(),
+              (command) => command.getRegistratorData(),
             ),
           },
         );

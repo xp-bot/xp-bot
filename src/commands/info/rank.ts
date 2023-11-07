@@ -1,10 +1,10 @@
 import { GuildMemberService } from '../../api/generated';
-import Command from '../../classes/command';
+import Command, { CommandOptionType } from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
 import defaultEmbed, {
   DefaultEmbedType,
 } from '../../helpers/messaging/default-embed';
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 import { t } from 'i18next';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
@@ -52,43 +52,15 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-  new SlashCommandBuilder().setName('rank').addUserOption((o) =>
-    o
-      .setName('user')
-      .setDescription('The user you want to recieve the RankingCard from.')
-      .setNameLocalizations({
-        de: t(['command_info.option.user.name', 'user'], {
-          ns: 'rank_command',
-          lng: 'de',
-        }),
-        'en-US': t(['command_info.option.user.name', 'user'], {
-          ns: 'rank_command',
-          lng: 'en',
-        }),
-      })
-      .setDescriptionLocalizations({
-        de: t(
-          [
-            'command_info.option.user.description',
-            'The user you want to recieve the RankingCard from.',
-          ],
-          {
-            ns: 'rank_command',
-            lng: 'de',
-          },
-        ),
-        'en-US': t(
-          [
-            'command_info.option.user.description',
-            'The user you want to recieve the RankingCard from.',
-          ],
-          {
-            ns: 'rank_command',
-            lng: 'en',
-          },
-        ),
-      })
-      .setRequired(false),
-  ),
+  {
+    name: 'rank',
+    options: [
+      {
+        name: 'user',
+        type: CommandOptionType.USER,
+        required: false,
+      },
+    ],
+  },
   execute,
 );

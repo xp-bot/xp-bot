@@ -1,6 +1,6 @@
 import XPError from './xp-error';
 import discordClient from '../clients/discord-client';
-import sanatiseCommandName from '../helpers/command-handling/sanatise-command-name';
+import generateSlashCommand from '../helpers/command-handling/generate-slash-command';
 import generateErrorEmbed from '../helpers/error-handling/generate-error-embed';
 import getSanatisedStacktrace from '../helpers/error-handling/get-sanatised-stacktrace';
 import {
@@ -8,12 +8,32 @@ import {
   Interaction,
   SlashCommandBuilder,
 } from 'discord.js';
-import { t } from 'i18next';
 import { noop } from 'lodash';
 
-type slashCommandBuilderData =
-  | SlashCommandBuilder
-  | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+type slashCommandBuilderData = Omit<
+  SlashCommandBuilder,
+  'addSubcommand' | 'addSubcommandGroup'
+>;
+
+export enum CommandOptionType {
+  STRING,
+  INTEGER,
+  BOOLEAN,
+  USER,
+  CHANNEL,
+  ROLE,
+  MENTIONABLE,
+  NUMBER,
+}
+
+export interface CommandPassthrough {
+  name: string;
+  options?: {
+    name: string;
+    type: CommandOptionType;
+    required: boolean;
+  }[];
+}
 
 export default class Command {
   private slashCommand: slashCommandBuilderData;
@@ -21,69 +41,19 @@ export default class Command {
   executeCallback: (interaction: ChatInputCommandInteraction) => Promise<void>;
 
   constructor(
-    slashCommand: slashCommandBuilderData,
+    command: CommandPassthrough,
     executeCallback: (
       interaction: ChatInputCommandInteraction,
     ) => Promise<void>,
     deleteCommand?: boolean,
   ) {
-    this.slashCommand = slashCommand;
+    this.slashCommand = generateSlashCommand(command);
     this.deleteCommand = deleteCommand || false;
     this.executeCallback = executeCallback;
   }
 
   getRegistratorData = () => {
-    const fallbackString = `${this.slashCommand.name} command`;
-    const sanatisedCommandName = sanatiseCommandName(this.slashCommand.name);
-    this.slashCommand
-      .setDescription(
-        t(
-          [
-            'command_info.description',
-            this.slashCommand.description || fallbackString,
-          ],
-          {
-            ns: `${sanatisedCommandName}_command`,
-            lng: 'en',
-          },
-        ),
-      )
-      .setNameLocalizations({
-        de: t(['command_info.name', this.slashCommand.name], {
-          ns: `${sanatisedCommandName}_command`,
-          lng: 'de',
-        }),
-        'en-US': t(['command_info.name', this.slashCommand.name], {
-          ns: `${sanatisedCommandName}_command`,
-          lng: 'en',
-        }),
-      })
-      .setDescriptionLocalizations({
-        de: t(
-          [
-            'command_info.description',
-            this.slashCommand.description,
-            fallbackString,
-          ],
-          {
-            ns: `${sanatisedCommandName}_command`,
-            lng: 'de',
-          },
-        ),
-        'en-US': t(
-          [
-            'command_info.description',
-            this.slashCommand.description,
-            fallbackString,
-          ],
-          {
-            ns: `${sanatisedCommandName}_command`,
-            lng: 'en',
-          },
-        ),
-      });
-
-    return this.slashCommand;
+    return this.slashCommand.toJSON();
   };
 
   execute = async (interaction: Interaction) => {

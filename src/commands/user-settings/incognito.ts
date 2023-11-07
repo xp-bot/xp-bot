@@ -1,5 +1,5 @@
 import { GuildMemberService } from '../../api/generated';
-import Command from '../../classes/command';
+import Command, { CommandOptionType } from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
 import defaultEmbed, {
   DefaultEmbedType,
@@ -52,34 +52,15 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-  new SlashCommandBuilder().setName('incognito').addBooleanOption((o) =>
-    o
-      .setName('incognito')
-      .setDescription(
-        t('command_info.option.incognito.description', {
-          ns: 'incognito_command',
-        }),
-      )
-      .setNameLocalizations({
-        de: t(['command_info.option.incognito.name', 'bla'], {
-          ns: 'incognito_command',
-          lng: 'de',
-        }),
-        'en-US': t('command_info.option.incognito.name', {
-          ns: 'incognito_command',
-        }),
-      })
-      .setDescriptionLocalizations({
-        de: t('command_info.option.incognito.description', {
-          ns: 'incognito_command',
-          lng: 'de',
-        }),
-        'en-US': t('command_info.option.incognito.description', {
-          ns: 'incognito_command',
-        }),
-      })
-      .setRequired(true),
-  ),
-
+  {
+    name: 'incognito',
+    options: [
+      {
+        name: 'incognito',
+        type: CommandOptionType.BOOLEAN,
+        required: true,
+      },
+    ],
+  },
   execute,
 );

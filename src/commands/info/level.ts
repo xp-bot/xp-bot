@@ -1,12 +1,12 @@
 import { GuildMemberService } from '../../api/generated';
-import Command from '../../classes/command';
+import Command, { CommandOptionType } from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
 import defaultEmbed, {
   DefaultEmbedType,
 } from '../../helpers/messaging/default-embed';
 import formatNumber from '../../helpers/numbers/format-number';
 import getRequiredXp from '../../helpers/numbers/get-required-xp';
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 import { t } from 'i18next';
 import { noop } from 'lodash';
 
@@ -63,31 +63,15 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 };
 
 export default new Command(
-  new SlashCommandBuilder().setName('level').addIntegerOption((option) =>
-    option
-      .setName('level')
-      .setDescription('The level to check the required xp for.')
-      .setNameLocalizations({
-        de: t('command_info.option.level.name', {
-          ns: 'level_command',
-          lng: 'de',
-        }),
-        'en-US': t('command_info.option.level.name', {
-          ns: 'level_command',
-          lng: 'en',
-        }),
-      })
-      .setDescriptionLocalizations({
-        de: t('command_info.option.level.description', {
-          ns: 'level_command',
-          lng: 'de',
-        }),
-        'en-US': t('command_info.option.level.description', {
-          ns: 'level_command',
-          lng: 'en',
-        }),
-      })
-      .setRequired(true),
-  ),
+  {
+    name: 'level',
+    options: [
+      {
+        name: 'level',
+        type: CommandOptionType.INTEGER,
+        required: true,
+      },
+    ],
+  },
   execute,
 );
