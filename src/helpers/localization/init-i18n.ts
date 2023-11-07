@@ -11,6 +11,8 @@ const i18nextConfig = {
     'rank_command',
     'incognito_command',
     'addxp_command',
+    'removexp_command',
+    'setxp_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

@@ -1,0 +1,1 @@
+{"command_info":{"description":"Set the xp amount of a specified user.","name":"setxp","option":{"user":{"description":"The user you want to set the xp of.","name":"user"},"xp":{"description":"The amount of xp you want to set the user to.","name":"xp"}}}}
