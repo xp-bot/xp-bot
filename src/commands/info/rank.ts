@@ -24,11 +24,22 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   if (guildMember.settings.incognito) {
     const embed = defaultEmbed(DefaultEmbedType.INFO);
     embed
-      .setTitle('Incognito')
+      .setTitle(
+        t('error.incognito.title', {
+          ns: 'rank_command',
+          lng: 'en',
+        }),
+      )
       .setDescription(
         interaction.user.id === userId
-          ? 'You are currently in incognito mode. Your ranking card is hidden.'
-          : 'This user is currently in incognito mode. Their ranking card is hidden.',
+          ? t('error.incognito.description.self', {
+              ns: 'rank_command',
+              lng: 'en',
+            })
+          : t('error.incognito.description.other', {
+              ns: 'rank_command',
+              lng: 'en',
+            }),
       );
 
     interaction.reply({ embeds: [embed] });
