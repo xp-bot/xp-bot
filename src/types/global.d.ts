@@ -3,13 +3,14 @@ declare namespace NodeJS {
     TOKEN: string;
     APPLICATION_ID: string;
     DEBUG_GUILD_ID: string;
-    API: string;
+    API_URL: string;
     API_TOKEN: string;
     ILUM_API: string;
     ILUM_API_TOKEN: string;
     I18N_TOKEN: string;
     CRYPTO_SECRET: string;
     CRYPTO_IV: string;
+    DASHBOARD_URL: string;
   }
 }
 declare global {

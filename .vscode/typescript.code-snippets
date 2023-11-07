@@ -2,14 +2,20 @@
 	"XP Command Preset": {
 		"prefix": "cmd",
 		"body": [
-			"import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';",
-            "import Command from '../../classes/command';",
+			"import Command from '../../classes/command';",
+            "import { ChatInputCommandInteraction } from 'discord.js';",
             "",
             "const execute = async (interaction: ChatInputCommandInteraction) => {",
             "  interaction.reply('hi from ${1:commandName}');",
             "};",
             "",
-            "export default new Command(new SlashCommandBuilder().setName('${1:commandName}'), execute);",
+            "export default new Command(",
+            "  {",
+            "    name: '${1:commandName}',",
+            "    options: [],",
+            "  },",
+            "  execute,",
+            ");",
             ""
 		],
 		"description": "Create a typed elysia route."

@@ -13,6 +13,7 @@ const i18nextConfig = {
     'addxp_command',
     'removexp_command',
     'setxp_command',
+    'leaderboard_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

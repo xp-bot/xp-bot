@@ -1,0 +1,12 @@
+{
+  "command_info": {
+    "description": "Command Description.",
+    "name": "commandname",
+    "option": {
+      "user": {
+        "description": "'user' option description.",
+        "name": "'user' option name"
+      }
+    }
+  }
+}
