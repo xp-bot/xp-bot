@@ -1,1 +1,20 @@
-{"command_info":{"description":"Let's go fishing.","name":"fish"},"game":{"result":{"0":"{{user}} just found an old shoe...","1":"{{user}} found a odd looking sock... It had {{xp}} in it!","2":"{{user}} caught a goldfish. They traded with an old man and received {{xp}} for it.","3":"While fishing {{user}} found a small box. It contained {{xp}}!","4":"{{user}} discovered an ancient bottle! It lead them to {{xp}}!","5":"{{user}} got into a fight with a kraken! They won and sold it for {{xp}}!","6":"{{user}} caught a huge fish! They sold it for {{xp}}!","easter_egg":{"1":{"description":"{{user}} found a hidden map while casting their net. It led them to buried treasure: {{xp}}!\n\nA true pirate's fortune, only discovered once in 10,000 tries!","title":"The Pirate's Fortune"}}}}}
+{
+  "command_info": { "description": "Let's go fishing.", "name": "fish" },
+  "game": {
+    "result": {
+      "0": "{{user}} just found an old shoe...",
+      "1": "{{user}} found a odd looking sock... It had {{xp}} in it!",
+      "2": "{{user}} caught a goldfish. They traded with an old man and received {{xp}} for it.",
+      "3": "While fishing {{user}} found a small box. It contained {{xp}}!",
+      "4": "{{user}} discovered an ancient bottle! It lead them to {{xp}}!",
+      "5": "{{user}} got into a fight with a kraken! They won and sold it for {{xp}}!",
+      "6": "{{user}} caught a huge fish! They sold it for {{xp}}!",
+      "easter_egg": {
+        "1": {
+          "description": "{{user}} found a hidden map while casting their net. It led them to buried treasure: {{xp}}!\n\nA true pirate's fortune, only discovered once in 10,000 tries!",
+          "title": "The Pirate's Fortune"
+        }
+      }
+    }
+  }
+}

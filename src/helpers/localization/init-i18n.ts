@@ -16,6 +16,8 @@ const i18nextConfig = {
     'setxp_command',
     'leaderboard_command',
     'fish_command',
+    'roll_command',
+    'loot_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

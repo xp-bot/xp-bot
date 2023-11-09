@@ -1,0 +1,1 @@
+{"command_info":{"description":"Test your luck and roll the dices.","name":"roll"},"game":{"result":"{{user}} received {{xp}} by rolling a {{result}} with the dice!"}}
