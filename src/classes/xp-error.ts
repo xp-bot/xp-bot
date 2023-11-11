@@ -8,6 +8,8 @@ export enum XPErrorType {
 
   API_GUILD_FETCH = 'api_guild_fetch',
   API_GUILD_UPDATE = 'api_guild_update',
+
+  INTERNAL_UNKNOWN = 'internal_unknown',
 }
 
 export const XPErrorTypeDetails: Record<
@@ -33,23 +35,29 @@ export const XPErrorTypeDetails: Record<
   [XPErrorType.API_GUILD_MEMBER_UPDATE]: {
     title: 'API Error',
     description:
-      'An error occurred while trying to update your settings. Please try again later.',
+      'An error occurred while trying to update user settings. Please try again later.',
   },
   [XPErrorType.API_GUILD_MEMBER_FETCH]: {
     title: 'API Error',
     description:
-      'An error occurred while trying to fetch your settings. Please try again later.',
+      'An error occurred while trying to fetch user settings. Please try again later.',
   },
 
   [XPErrorType.API_GUILD_FETCH]: {
     title: 'API Error',
     description:
-      'An error occurred while trying to fetch your server settings. Please try again later.',
+      'An error occurred while trying to fetch server settings. Please try again later.',
   },
   [XPErrorType.API_GUILD_UPDATE]: {
     title: 'API Error',
     description:
-      'An error occurred while trying to update your server settings. Please try again later.',
+      'An error occurred while trying to update server settings. Please try again later.',
+  },
+
+  [XPErrorType.INTERNAL_UNKNOWN]: {
+    title: 'Unknown Error',
+    description:
+      'An unknown error occurred while trying to execute the requested action. Please try again later.',
   },
 };
 

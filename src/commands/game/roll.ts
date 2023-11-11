@@ -1,6 +1,7 @@
 import { GuildMemberService, GuildService } from '../../api/generated';
 import Command from '../../classes/command';
 import XPError, { XPErrorType } from '../../classes/xp-error';
+import xpChanged from '../../handlers/internal/xp-changed';
 import calculateBasicGame from '../../helpers/games/calculate-basic-game';
 import cooldownEmbed from '../../helpers/messaging/cooldown-embed';
 import defaultEmbed from '../../helpers/messaging/default-embed';
@@ -75,6 +76,8 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       xp: guildMember.xp + rollResult.xp,
     },
   });
+
+  await xpChanged(guildId, user, rollResult.xp);
 
   interaction.reply({
     embeds: [embed],
