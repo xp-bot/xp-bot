@@ -1,61 +1,83 @@
+import XPError from './xp-error';
+import discordClient from '../clients/discord-client';
+import generateSlashCommand from '../helpers/command-handling/generate-slash-command';
+import generateErrorEmbed from '../helpers/error-handling/generate-error-embed';
+import getSanatisedStacktrace from '../helpers/error-handling/get-sanatised-stacktrace';
+import * as Sentry from '@sentry/node';
 import {
   ChatInputCommandInteraction,
   Interaction,
   SlashCommandBuilder,
 } from 'discord.js';
-import discordClient from '../clients/discord-client';
+import { noop } from 'lodash';
 
-interface CommandData {
-  commandName: string;
-  commandDescription: string;
+type slashCommandBuilderData = Omit<
+  SlashCommandBuilder,
+  'addSubcommand' | 'addSubcommandGroup'
+>;
+
+export enum CommandOptionType {
+  STRING,
+  INTEGER,
+  BOOLEAN,
+  USER,
+  CHANNEL,
+  ROLE,
+  MENTIONABLE,
+  NUMBER,
+}
+
+export interface CommandPassthrough {
+  name: string;
+  options?: {
+    name: string;
+    type: CommandOptionType;
+    required: boolean;
+  }[];
 }
 
 export default class Command {
-  private commandData: CommandData;
+  private slashCommand: slashCommandBuilderData;
   deleteCommand: boolean = false;
   executeCallback: (interaction: ChatInputCommandInteraction) => Promise<void>;
 
   constructor(
-    commandData: CommandData,
+    command: CommandPassthrough,
     executeCallback: (
-      interaction: ChatInputCommandInteraction
+      interaction: ChatInputCommandInteraction,
     ) => Promise<void>,
-    deleteCommand?: boolean
+    deleteCommand?: boolean,
   ) {
-    this.commandData = commandData;
+    this.slashCommand = generateSlashCommand(command);
     this.deleteCommand = deleteCommand || false;
     this.executeCallback = executeCallback;
   }
 
-  getRegistratorData = () =>
-    new SlashCommandBuilder()
-      .setName(this.commandData.commandName)
-      .setDescription(this.commandData.commandDescription);
+  getRegistratorData = () => {
+    return this.slashCommand.toJSON();
+  };
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
-    console.log(
-      `[COMMAND] Recieved command request [${this.commandData.commandName}]`
-    );
+    console.debug(`Recieved command request [${this.slashCommand.name}]`);
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
-        console.log(
-          `[COMMAND] Successfully executed command [${this.commandData.commandName}]`
+        console.debug(
+          `Successfully executed command [${this.slashCommand.name}]`,
         );
       })
-      .catch(() => {
-        interaction
-          .reply({
-            content: 'An error occured while executing this command.',
-            ephemeral: true,
-          })
-          .catch(() => {
-            console.log('An error occured while executing this command.');
-          });
+      .catch((error: XPError) => {
+        Sentry.captureException(error);
+        console.error(
+          `${error.message} - [${
+            this.slashCommand.name
+          }] - '${getSanatisedStacktrace(error)}'`,
+        );
+        interaction.reply(generateErrorEmbed(error)).catch(noop);
       });
   };
 
   registerCommand = () => {
-    discordClient.commands.set(this.commandData.commandName, this);
+    discordClient.commands.set(this.slashCommand.name, this);
   };
 }

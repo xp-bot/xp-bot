@@ -1,8 +1,7 @@
-import console from 'console';
-import { Client } from 'discord.js';
+import { Client, Events } from 'discord.js';
 
 export default (client: Client) => {
-  client.on('interactionCreate', async (interaction) => {
+  client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isCommand()) return;
 
     // TODO: Better exception handling

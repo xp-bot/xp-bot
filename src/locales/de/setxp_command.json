@@ -1,0 +1,1 @@
+{"command_info":{"description":"Legen Sie die XP-Menge eines bestimmten Benutzers fest.","name":"setxp","option":{"user":{"description":"Der Benutzer, dessen XP festgelegt werden soll.","name":"Benutzer"},"xp":{"description":"Die XP-Menge, auf die Sie den Benutzer festlegen möchten.","name":"xp"}}}}

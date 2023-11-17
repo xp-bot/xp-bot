@@ -2,9 +2,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.addMissingImports": true,
-    "source.organizeImports": true
+    "source.organizeImports": false
   },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "eslint.validate": [
     "javascript",
     "typescript"
