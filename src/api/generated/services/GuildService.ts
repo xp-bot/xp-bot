@@ -36,61 +36,61 @@ export class GuildService {
      * @returns Guild
      * @throws ApiError
      */
-    public static patchGuild({
+    public static updateGuild({
         guildId,
         requestBody,
     }: {
         guildId: string,
         requestBody: {
             values?: {
-                messagexp: number;
-                voicexp: number;
-                reactionxp: number;
-                lootXP: number;
-                fishXP: number;
-                rollXP: number;
-                triviaxp: number;
-                maximumdailyxp: number;
-                maximumlevel: number;
-                messagecooldown: number;
-                gamecooldown: number;
-                triviacooldown: number;
-                'req-message-length': number;
-                voicejoincooldown: number;
+                messagexp?: number;
+                voicexp?: number;
+                reactionxp?: number;
+                lootXP?: number;
+                fishXP?: number;
+                rollXP?: number;
+                triviaxp?: number;
+                maximumdailyxp?: number;
+                maximumlevel?: number;
+                messagecooldown?: number;
+                gamecooldown?: number;
+                triviacooldown?: number;
+                'req-message-length'?: number;
+                voicejoincooldown?: number;
             };
             modules?: {
-                messagexp: boolean;
-                voicexp: boolean;
-                reactionxp: boolean;
-                ignoreafk: boolean;
-                autonick: boolean;
-                autonickuseprefix: boolean;
-                autonickshowstring: boolean;
-                leaderboard: boolean;
-                singlerankrole: boolean;
-                removereachedlevelroles: boolean;
-                maximumlevel: boolean;
-                resetonleave: boolean;
-                enablecommandsinthreads: boolean;
-                games: boolean;
-                trivia: boolean;
+                messagexp?: boolean;
+                voicexp?: boolean;
+                reactionxp?: boolean;
+                ignoreafk?: boolean;
+                autonick?: boolean;
+                autonickuseprefix?: boolean;
+                autonickshowstring?: boolean;
+                leaderboard?: boolean;
+                singlerankrole?: boolean;
+                removereachedlevelroles?: boolean;
+                maximumlevel?: boolean;
+                resetonleave?: boolean;
+                enablecommandsinthreads?: boolean;
+                games?: boolean;
+                trivia?: boolean;
             };
             logs?: {
-                voicetime: boolean;
-                exceptions: boolean;
-                levelup: boolean;
+                voicetime?: boolean;
+                exceptions?: boolean;
+                levelup?: boolean;
             };
             ignored?: {
-                roles: Array<string>;
-                channels: Array<string>;
-                categories: Array<string>;
+                roles?: Array<string>;
+                channels?: Array<string>;
+                categories?: Array<string>;
             };
             boosts?: {
-                roles: Array<{
+                roles?: Array<{
                     id: string;
                     percentage: number;
                 }>;
-                channels: Array<{
+                channels?: Array<{
                     id: string;
                     percentage: number;
                 }>;
@@ -100,19 +100,19 @@ export class GuildService {
                 level: number;
             }>;
             announce?: {
-                current: boolean;
-                channelID: number;
-                message: string;
-                ping: boolean;
+                current?: boolean;
+                channelID?: number;
+                message?: string;
+                ping?: boolean;
                 disappearafter?: number;
-                conditions: {
-                    onlyOnNewRole: boolean;
+                conditions?: {
+                    onlyOnNewRole?: boolean;
                 };
             };
             leaderboard_message?: {
-                enabled: boolean;
-                messageID: string | null;
-                channelID: string | null;
+                enabled?: boolean;
+                messageID?: string | null;
+                channelID?: string | null;
             };
             premiumUser?: string | null;
             voteFreeUser?: string | null;
@@ -135,7 +135,7 @@ export class GuildService {
      * @returns any
      * @throws ApiError
      */
-    public static deleteGuild({
+    public static resetGuild({
         guildId,
     }: {
         guildId: string,
@@ -154,7 +154,7 @@ export class GuildService {
      * @returns DBGuildMember
      * @throws ApiError
      */
-    public static getGuildMembers({
+    public static getAllGuildMembers({
         guildId,
     }: {
         guildId: string,
@@ -173,7 +173,7 @@ export class GuildService {
      * @returns any
      * @throws ApiError
      */
-    public static patchGuildMembersDirectXp({
+    public static setAllGuildMembersXp({
         guildId,
         requestBody,
     }: {

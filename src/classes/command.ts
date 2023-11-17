@@ -3,6 +3,7 @@ import discordClient from '../clients/discord-client';
 import generateSlashCommand from '../helpers/command-handling/generate-slash-command';
 import generateErrorEmbed from '../helpers/error-handling/generate-error-embed';
 import getSanatisedStacktrace from '../helpers/error-handling/get-sanatised-stacktrace';
+import * as Sentry from '@sentry/node';
 import {
   ChatInputCommandInteraction,
   Interaction,
@@ -66,6 +67,7 @@ export default class Command {
         );
       })
       .catch((error: XPError) => {
+        Sentry.captureException(error);
         console.error(
           `${error.message} - [${
             this.slashCommand.name

@@ -38,7 +38,7 @@ export class GuildMemberService {
      * @returns GuildMember
      * @throws ApiError
      */
-    public static patchGuildMember({
+    public static updateGuildMember({
         guildId,
         userId,
         requestBody,
@@ -48,19 +48,19 @@ export class GuildMemberService {
         requestBody: {
             xp?: number;
             settings?: {
-                incognito: boolean;
+                incognito?: boolean;
             };
             timestamps?: {
-                message_cooldown: number | null;
-                game_daily: number | null;
-                game_trivia: number | null;
-                game_loot: number | null;
-                game_fish: number | null;
-                game_roll: number | null;
+                message_cooldown?: number | null;
+                game_daily?: number | null;
+                game_trivia?: number | null;
+                game_loot?: number | null;
+                game_fish?: number | null;
+                game_roll?: number | null;
             };
             streaks?: {
-                game_daily: number;
-                game_trivia: number;
+                game_daily?: number;
+                game_trivia?: number;
             };
             userData?: GuildMemberData;
         },
@@ -82,7 +82,7 @@ export class GuildMemberService {
      * @returns any
      * @throws ApiError
      */
-    public static deleteGuildMember({
+    public static resetGuildMember({
         guildId,
         userId,
     }: {
@@ -104,7 +104,7 @@ export class GuildMemberService {
      * @returns any
      * @throws ApiError
      */
-    public static postGuildMemberDirectXp({
+    public static setGuildMemberXp({
         guildId,
         userId,
         requestBody,
@@ -133,7 +133,7 @@ export class GuildMemberService {
      * @returns any
      * @throws ApiError
      */
-    public static postGuildMemberDirectUpdateuserdata({
+    public static updateGuildMemberUserData({
         guildId,
         userId,
         requestBody,

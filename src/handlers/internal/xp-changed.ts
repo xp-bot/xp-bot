@@ -54,7 +54,7 @@ export default async (
   //TODO: Implement announcements
 
   await guildMemberService_
-    .postGuildMemberDirectXp({
+    .setGuildMemberXp({
       guildId,
       userId: user.id,
       requestBody: {

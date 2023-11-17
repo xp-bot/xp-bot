@@ -11,6 +11,7 @@ declare namespace NodeJS {
     CRYPTO_SECRET: string;
     CRYPTO_IV: string;
     DASHBOARD_URL: string;
+    SENTRY_DSN: string;
   }
 }
 declare global {

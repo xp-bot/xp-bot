@@ -96,12 +96,11 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       })}`,
     );
 
-  await guildMemberService_.patchGuildMember({
+  await guildMemberService_.updateGuildMember({
     guildId,
     userId: user.id,
     requestBody: {
       timestamps: {
-        ...guildMember.timestamps,
         game_fish: Date.now(),
       },
       userData: {

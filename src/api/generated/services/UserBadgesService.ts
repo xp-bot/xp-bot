@@ -34,7 +34,7 @@ export class UserBadgesService {
      * @returns string
      * @throws ApiError
      */
-    public static postUserBadges({
+    public static setUserBadges({
         userId,
     }: {
         userId: string,
@@ -53,7 +53,7 @@ export class UserBadgesService {
      * @returns string
      * @throws ApiError
      */
-    public static putUserBadges({
+    public static addUserBadge({
         userId,
         badge,
     }: {
@@ -75,7 +75,7 @@ export class UserBadgesService {
      * @returns string
      * @throws ApiError
      */
-    public static deleteUserBadges({
+    public static removeUserBadge({
         userId,
         badge,
     }: {

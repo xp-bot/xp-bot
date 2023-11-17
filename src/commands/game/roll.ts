@@ -60,12 +60,11 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     })}`,
   );
 
-  await guildMemberService_.patchGuildMember({
+  await guildMemberService_.updateGuildMember({
     guildId,
     userId: user.id,
     requestBody: {
       timestamps: {
-        ...guildMember.timestamps,
         game_roll: Date.now(),
       },
       userData: {
@@ -73,7 +72,6 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         banner: user.banner || undefined,
         username: user.username,
       },
-      xp: guildMember.xp + rollResult.xp,
     },
   });
 

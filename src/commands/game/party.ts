@@ -19,7 +19,8 @@ import {
   MessageComponentInteraction,
   User,
 } from 'discord.js';
-import { find, join, map, some } from 'lodash';
+import { t } from 'i18next';
+import { find, forEach, join, map, some, upperFirst } from 'lodash';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   const guildService_ = GuildService;
@@ -66,15 +67,19 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     name: user.username,
     iconURL: user.avatarURL() || undefined,
   });
-  embed.setTitle('New Party hosting!');
+  embed.setTitle(t('title.new_party', { ns: 'party_command', lng: 'en' }));
   embed.setFields([
     {
-      name: 'Current Participants',
+      name: t('field.current_participants', { ns: 'party_command', lng: 'en' }),
       value: `\`\`\`md\n${usersToList(participantsList)}\n\`\`\``,
     },
   ]);
   embed.setFooter({
-    text: 'Party is starting in 15 seconds!',
+    text: t('footer.party_starting_in_n', {
+      ns: 'party_command',
+      lng: 'en',
+      time: t('second', { lng: 'en', count: 15 }),
+    }),
   });
 
   const message = await interaction.reply({
@@ -83,7 +88,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId('joinParty')
-          .setLabel('Join Party')
+          .setLabel(t('button.join', { ns: 'party_command', lng: 'en' }))
           .setStyle(ButtonStyle.Primary),
       ),
     ],
@@ -104,7 +109,10 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         ephemeral: true,
         embeds: [
           defaultEmbed(DefaultEmbedType.ERROR).setDescription(
-            `${systemEmoji.cross} You've already joined that party!`,
+            `${systemEmoji.cross} ${t('info.error.already_joined', {
+              ns: 'party_command',
+              lng: 'en',
+            })}`,
           ),
         ],
       });
@@ -113,7 +121,10 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       interaction.editReply({
         embeds: [
           embed.setFields({
-            name: 'Current Participants',
+            name: t('field.current_participants', {
+              ns: 'party_command',
+              lng: 'en',
+            }),
             value: `\`\`\`md\n${usersToList(participantsList)}\n\`\`\``,
           }),
         ],
@@ -129,7 +140,10 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         ephemeral: true,
         embeds: [
           defaultEmbed(DefaultEmbedType.SUCCESS).setDescription(
-            `${systemEmoji.checkmark} You've joined the party!`,
+            `${systemEmoji.checkmark} ${t('info.success.joined', {
+              ns: 'party_command',
+              lng: 'en',
+            })}`,
           ),
         ],
       });
@@ -142,7 +156,10 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       interaction.editReply({
         embeds: [
           defaultEmbed(DefaultEmbedType.ERROR).setDescription(
-            'Not enough players registered to participate in this Party!',
+            t('info.error.not_enough_participants', {
+              ns: 'party_command',
+              lng: 'en',
+            }),
           ),
         ],
         components: [],
@@ -150,14 +167,15 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       return;
     }
 
-    const memberResults = [];
-
     const resultEmbed = defaultEmbed(DefaultEmbedType.SUCCESS);
 
     if (onlyWinner)
       resultEmbed.setFooter({
         text: onlyWinner
-          ? 'The party has been started in "luck"-mode, only the winner will receive xp!'
+          ? t('footer.luck_mode', {
+              ns: 'party_command',
+              lng: 'en',
+            })
           : '',
       });
 
@@ -165,19 +183,22 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       users: [],
       xp: 0,
     };
-    for (const participant of participantsList) {
+
+    const results = map(participantsList, async (p) => {
       const obj: {
         user: User;
         fish?: IGameResult;
         roll?: IGameResult;
         loot?: IGameResult;
+        overallXP: number;
       } = {
-        user: participant,
+        user: p,
+        overallXP: 0,
       };
       const guildMember = await guildMemberService_
         .getGuildMember({
           guildId,
-          userId: participant.id,
+          userId: p.id,
         })
         .catch((e) => {
           throw new XPError(XPErrorType.API_GUILD_MEMBER_FETCH, e);
@@ -203,84 +224,135 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       obj.roll = r;
       obj.fish = f;
       obj.loot = l;
+      obj.overallXP = r.xp + f.xp + l.xp;
+      highest.xp += obj.overallXP;
 
-      memberResults.push(obj);
-      let xp = 0;
+      if (highest.xp < obj.overallXP || !highest.xp) {
+        highest.users = [p];
+        highest.xp = obj.overallXP;
+      } else if (highest.xp == obj.overallXP) {
+        highest.users.push(p);
+      }
+
+      return obj;
+    });
+
+    forEach(await Promise.all(results), (r) => {
       let result = '';
-      if (obj.fish) {
-        result += `:fishing_pole_and_fish: Fish:\n${systemEmoji.blank} ${
-          systemEmoji.blank
-        } **${formatNumber(obj.fish.xp)}xp**\n`;
-        xp += obj.fish.xp;
+      if (r.fish) {
+        result += `:fishing_pole_and_fish: ${upperFirst(
+          t('command_info.name', {
+            ns: 'fish_command',
+            lng: 'en',
+          }),
+        )}:\n${systemEmoji.blank} ${systemEmoji.blank} **${formatNumber(
+          r.fish.xp,
+        )}xp**\n`;
       } else {
-        result += `:fishing_pole_and_fish: Fish:\n${systemEmoji.blank} ${systemEmoji.blank} **0xp**\n`;
+        result += `:fishing_pole_and_fish: ${upperFirst(
+          t('command_info.name', {
+            ns: 'fish_command',
+            lng: 'en',
+          }),
+        )}:\n${systemEmoji.blank} ${systemEmoji.blank} **0xp**\n`;
       }
 
-      if (obj.roll) {
-        result += `:game_die: Roll:\n${systemEmoji.blank} ${
-          systemEmoji.blank
-        } **${formatNumber(obj.roll.xp)}xp**\n`;
-        xp += obj.roll.xp;
+      if (r.roll) {
+        result += `:game_die: ${upperFirst(
+          t('command_info.name', {
+            ns: 'roll_command',
+            lng: 'en',
+          }),
+        )}:\n${systemEmoji.blank} ${systemEmoji.blank} **${formatNumber(
+          r.roll.xp,
+        )}xp**\n`;
       } else {
-        result += `:game_die: Roll:\n${systemEmoji.blank} ${systemEmoji.blank} **0xp**\n`;
+        result += `:game_die: ${upperFirst(
+          t('command_info.name', {
+            ns: 'roll_command',
+            lng: 'en',
+          }),
+        )}:\n${systemEmoji.blank} ${systemEmoji.blank} **0xp**\n`;
       }
 
-      if (obj.loot) {
-        result += `:package: Loot:\n${systemEmoji.blank} ${
-          systemEmoji.blank
-        } **${formatNumber(obj.loot.xp)}xp**\n`;
-        xp += obj.loot.xp;
+      if (r.loot) {
+        result += `:package: ${upperFirst(
+          t('command_info.name', {
+            ns: 'loot_command',
+            lng: 'en',
+          }),
+        )}:\n${systemEmoji.blank} ${systemEmoji.blank} **${formatNumber(
+          r.loot.xp,
+        )}xp**\n`;
       } else {
-        result += `:package: Loot:\n${systemEmoji.blank} ${systemEmoji.blank} **0xp**\n`;
-      }
-
-      if (highest.xp < xp || !highest.xp) {
-        highest.users = [participant];
-        highest.xp = xp;
-      } else if (highest.xp == xp) {
-        highest.users.push(participant);
+        result += `:package: ${upperFirst(
+          t('command_info.name', {
+            ns: 'loot_command',
+            lng: 'en',
+          }),
+        )}:\n${systemEmoji.blank} ${systemEmoji.blank} **0xp**\n`;
       }
 
       resultEmbed.addFields([
         {
-          name: participant.username,
-          value: `${result}${systemEmoji.blank} **Reward:**\n${
-            systemEmoji.blank
-          } ${systemEmoji.blank} **${
-            onlyWinner && !some(highest.users, ['id', obj.user.id])
+          name: r.user.username,
+          value: `${result}${systemEmoji.blank} **${t('field.reward', {
+            ns: 'party_command',
+            lng: 'en',
+          })}:**\n${systemEmoji.blank} ${systemEmoji.blank} **${
+            onlyWinner && !some(highest.users, ['id', r.user.id])
               ? '0'
-              : formatNumber(xp)
+              : formatNumber(r.overallXP)
           }xp**`,
           inline: true,
         },
       ]);
-    }
+      if (!onlyWinner || some(highest.users, ['id', r.user.id]))
+        xpChanged(guildId, r.user, r.overallXP);
 
-    //TODO: XP and timestamp assignment
+      guildMemberService_.updateGuildMember({
+        guildId,
+        userId: r.user.id,
+        requestBody: {
+          timestamps: {
+            game_fish: Date.now(),
+            game_roll: Date.now(),
+            game_loot: Date.now(),
+          },
+        },
+      });
+    });
+
     if (highest.users.length > 0) {
-      for (let i = 0; i < highest.users.length; i++) {
-        const element = highest.users[i];
-        if (onlyWinner) {
-        }
-      }
-
       resultEmbed.setDescription(
-        `**${join(
-          highest.users,
-          '** & **',
-        )}** won the Party with **${formatNumber(highest.xp)}xp**!`,
+        t('info.success.won', {
+          ns: 'party_command',
+          lng: 'en',
+          users: `**${join(map(highest.users, 'username'), '** & **')}**`,
+          xp: ` **${formatNumber(highest.xp)}xp**`,
+        }),
       );
     } else
       resultEmbed.setDescription(
-        'No one won the Party, better luck next time!',
+        t('info.error.no_win', {
+          ns: 'party_command',
+          lng: 'en',
+        }),
       );
     interaction.editReply({
       embeds: [
-        resultEmbed.setTitle('Party results').setThumbnail(
-          guild.iconURL({
-            extension: 'png',
-          }) || null,
-        ),
+        resultEmbed
+          .setTitle(
+            t('title.results', {
+              ns: 'party_command',
+              lng: 'en',
+            }),
+          )
+          .setThumbnail(
+            guild.iconURL({
+              extension: 'png',
+            }) || null,
+          ),
       ],
       components: [],
     });

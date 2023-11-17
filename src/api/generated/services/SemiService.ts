@@ -17,7 +17,7 @@ export class SemiService {
      * @returns string
      * @throws ApiError
      */
-    public static getRank({
+    public static getRankingCard({
         guildId,
         userId,
     }: {
@@ -39,7 +39,7 @@ export class SemiService {
      * @returns any
      * @throws ApiError
      */
-    public static getSemiGuildMember({
+    public static getMixedGuildUser({
         guildId,
         userId,
     }: {

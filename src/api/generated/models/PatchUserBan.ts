@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Partial_UserBan_ = {
+export type PatchUserBan = {
     types?: {
         rankingcard?: boolean;
     };

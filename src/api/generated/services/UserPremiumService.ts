@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Partial_UserPremium_ } from '../models/Partial_UserPremium_';
+import type { PatchUserPremium } from '../models/PatchUserPremium';
 import type { UserPremium } from '../models/UserPremium';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -35,13 +35,13 @@ export class UserPremiumService {
      * @returns any
      * @throws ApiError
      */
-    public static patchUserPremium({
+    public static updateUserPremium({
         userId,
         requestBody,
     }: {
         userId: string,
         requestBody: {
-            premium: Partial_UserPremium_;
+            premium: PatchUserPremium;
         },
     }): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -60,7 +60,7 @@ export class UserPremiumService {
      * @returns UserPremium
      * @throws ApiError
      */
-    public static postUserPremiumServers({
+    public static setUserPremiumServers({
         userId,
         requestBody,
     }: {
