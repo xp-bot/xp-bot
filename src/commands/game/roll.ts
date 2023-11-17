@@ -55,7 +55,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       ns: 'roll_command',
       lng: 'en',
       result: `**${rollResult.result}**`,
-      user: `**${user.username}**`,
+      user: `**${user.displayName || user.username}**`,
       xp: `**${rollResult.xp}xp**`,
     })}`,
   );
@@ -70,7 +70,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       userData: {
         avatar: user.avatar || undefined,
         banner: user.banner || undefined,
-        username: user.username,
+        username: user.displayName || user.username,
       },
     },
   });

@@ -5,6 +5,9 @@ const i18nextConfig = {
   fallbackLng: 'en',
   fallbackNS: 'global',
   supportedLngs: ['en', 'de'],
+  interpolation: {
+    escapeValue: false,
+  },
   ns: [
     'global',
     'level_command',
