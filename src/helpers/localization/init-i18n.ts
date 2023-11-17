@@ -18,6 +18,7 @@ const i18nextConfig = {
     'fish_command',
     'roll_command',
     'loot_command',
+    'party_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

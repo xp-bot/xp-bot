@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Partial_UserPremium_ } from '../models/Partial_UserPremium_';
+import type { PatchUserPremium } from '../models/PatchUserPremium';
 import type { User } from '../models/User';
 import type { UserBackground } from '../models/UserBackground';
 import type { UserBadges } from '../models/UserBadges';
@@ -39,7 +39,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static postUserBadges({
+    public static setUserBadges({
         userId,
     }: {
         userId: string,
@@ -58,7 +58,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static putUserBadges({
+    public static addUserBadge({
         userId,
         badge,
     }: {
@@ -80,7 +80,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static deleteUserBadges({
+    public static removeUserBadge({
         userId,
         badge,
     }: {
@@ -121,12 +121,25 @@ export class UserService {
      * @returns User
      * @throws ApiError
      */
-    public static patchUser({
+    public static updateUser({
         userId,
         requestBody,
     }: {
         userId: string,
-        requestBody: Record<string, any>,
+        requestBody: {
+            badges?: Array<'xpboost' | 'xpbughunter' | 'xpdev' | 'xpfeaturesmith' | 'xppremium' | 'xpsupport' | 'xptranslator'>;
+            titles?: Array<'xpdev' | 'xpheaddev' | 'xppremium' | 'xpsupport'>;
+            settings?: {
+                background?: {
+                    bg?: number;
+                    blur?: number;
+                    custom?: boolean;
+                    canvas?: boolean;
+                };
+                language?: string | null;
+            };
+            timestamps?: Record<string, string | null>;
+        },
     }): CancelablePromise<User> {
         return __request(OpenAPI, {
             method: 'PATCH',
@@ -144,7 +157,7 @@ export class UserService {
      * @returns any
      * @throws ApiError
      */
-    public static deleteUser({
+    public static resetUser({
         userId,
     }: {
         userId: string,
@@ -182,7 +195,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static postUserBackground({
+    public static setUserBackground({
         userId,
         requestBody,
     }: {
@@ -226,13 +239,13 @@ export class UserService {
      * @returns any
      * @throws ApiError
      */
-    public static patchUserPremium({
+    public static updateUserPremium({
         userId,
         requestBody,
     }: {
         userId: string,
         requestBody: {
-            premium: Partial_UserPremium_;
+            premium: PatchUserPremium;
         },
     }): CancelablePromise<any> {
         return __request(OpenAPI, {
@@ -251,7 +264,7 @@ export class UserService {
      * @returns UserPremium
      * @throws ApiError
      */
-    public static postUserPremiumServers({
+    public static setUserPremiumServers({
         userId,
         requestBody,
     }: {
@@ -298,7 +311,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static postUserTitles({
+    public static setUserTitles({
         userId,
     }: {
         userId: string,
@@ -317,7 +330,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static putUserTitles({
+    public static addUserTitle({
         userId,
         title,
     }: {
@@ -339,7 +352,7 @@ export class UserService {
      * @returns string
      * @throws ApiError
      */
-    public static deleteUserTitles({
+    public static removeUserTitle({
         userId,
         title,
     }: {

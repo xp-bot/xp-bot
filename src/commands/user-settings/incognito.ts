@@ -6,7 +6,7 @@ import defaultEmbed, {
 } from '../../helpers/messaging/default-embed';
 import systemEmoji from '../../interfaces/system-emojis';
 
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 import { t } from 'i18next';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
@@ -22,7 +22,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   const newState = interaction.options.getBoolean('incognito', true);
 
   await guildMemberService_
-    .patchGuildMember({
+    .updateGuildMember({
       guildId,
       userId,
       requestBody: {

@@ -34,7 +34,7 @@ export class UserTitlesService {
      * @returns string
      * @throws ApiError
      */
-    public static postUserTitles({
+    public static setUserTitles({
         userId,
     }: {
         userId: string,
@@ -53,7 +53,7 @@ export class UserTitlesService {
      * @returns string
      * @throws ApiError
      */
-    public static putUserTitles({
+    public static addUserTitle({
         userId,
         title,
     }: {
@@ -75,7 +75,7 @@ export class UserTitlesService {
      * @returns string
      * @throws ApiError
      */
-    public static deleteUserTitles({
+    public static removeUserTitle({
         userId,
         title,
     }: {

@@ -15,7 +15,7 @@ export default async (
   xpChange?: number,
   absoluteXP?: number,
 ) => {
-  if (isUndefined(xpChange) || isUndefined(absoluteXP))
+  if (isUndefined(xpChange) && isUndefined(absoluteXP))
     throw new XPError(XPErrorType.INTERNAL_UNKNOWN);
   const setAbsoluteXP = isUndefined(xpChange) && !isUndefined(absoluteXP);
 
@@ -42,7 +42,9 @@ export default async (
   let newXp =
     max([
       0,
-      setAbsoluteXP ? floor(absoluteXP) : floor(guildMember.xp + xpChange),
+      setAbsoluteXP
+        ? floor(absoluteXP)
+        : floor(guildMember.xp + (xpChange || 0)),
     ]) || 0;
   const newLevel = calculateLevel(newXp);
 
@@ -52,7 +54,7 @@ export default async (
   //TODO: Implement announcements
 
   await guildMemberService_
-    .postGuildMemberDirectXp({
+    .setGuildMemberXp({
       guildId,
       userId: user.id,
       requestBody: {

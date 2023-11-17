@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Partial_UserPremium_ = {
+export type PatchUserPremium = {
     userPremium?: boolean;
     serverPremium?: number;
     servers?: Array<string>;

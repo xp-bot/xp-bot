@@ -8,14 +8,19 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node src/index.ts | pino-pretty",
-    "build": "yarn lint && tsc",
+    "build": "yarn lint && tsc && yarn sentry:sourcemaps",
+    "start:prod": "NODE_ENV=production node build/index.js | pino-pretty",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "generate-services": "curl http://xp-bot.net:3001/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/generator-overrides/request.ts --client axios --useOptions",
-    "generate-services:local": "curl http://localhost:3001/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/overrides/request.ts --client axios --useOptions",
-    "translate": "i18nexus pull -k $(grep I18N_TOKEN .env | cut -d '=' -f2) -p src/locales"
+    "generate-services:local": "openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/overrides/request.ts --client axios --useOptions",
+    "translate": "i18nexus pull -k $(grep I18N_TOKEN .env | cut -d '=' -f2) -p src/locales",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org namespacemedia --project node ./build && sentry-cli sourcemaps upload --org namespacemedia --project node ./build"
   },
   "dependencies": {
+    "@sentry/cli": "^2.21.5",
+    "@sentry/node": "^7.80.1",
+    "@sentry/profiling-node": "^1.2.6",
     "@types/node": "^20.8.9",
     "axios": "^1.6.0",
     "discord.js": "^14.13.0",

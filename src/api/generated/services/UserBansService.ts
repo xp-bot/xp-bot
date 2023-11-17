@@ -16,7 +16,7 @@ export class UserBansService {
      * @returns DBUserBan
      * @throws ApiError
      */
-    public static getBansUser(): CancelablePromise<Array<DBUserBan>> {
+    public static getAllUserBans(): CancelablePromise<Array<DBUserBan>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/bans/user/',
@@ -28,7 +28,7 @@ export class UserBansService {
      * @returns UserBan
      * @throws ApiError
      */
-    public static getBansUser1({
+    public static getUserBan({
         userId,
     }: {
         userId: string,
@@ -47,7 +47,7 @@ export class UserBansService {
      * @returns UserBan
      * @throws ApiError
      */
-    public static patchBansUser({
+    public static patchUserBan({
         userId,
         requestBody,
     }: {
@@ -75,7 +75,7 @@ export class UserBansService {
      * @returns any
      * @throws ApiError
      */
-    public static deleteBansUser({
+    public static deleteUserBan({
         userId,
     }: {
         userId: string,
