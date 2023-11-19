@@ -22,6 +22,7 @@ const i18nextConfig = {
     'roll_command',
     'loot_command',
     'party_command',
+    'about_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };
