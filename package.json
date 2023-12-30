@@ -14,7 +14,7 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "generate-services": "curl http://xp-bot.net:3001/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/generator-overrides/request.ts --client axios --useOptions",
     "generate-services:local": "openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/overrides/request.ts --client axios --useOptions",
-    "translate": "i18nexus pull -k $(grep I18N_TOKEN .env | cut -d '=' -f2) -p src/locales",
+    "translate": "i18nexus pull -k 6WtsUiuNBRFehb7Z1biZFg -p src/locales",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org namespacemedia --project node ./build && sentry-cli sourcemaps upload --org namespacemedia --project node ./build"
   },
   "dependencies": {
