@@ -61,7 +61,7 @@ export default async (
         userData: {
           avatar: user.avatar || undefined,
           banner: user.banner || undefined,
-          username: user.username,
+          username: user.displayName || user.username,
         },
         xp: newXp,
       },

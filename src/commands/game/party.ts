@@ -20,7 +20,15 @@ import {
   User,
 } from 'discord.js';
 import { t } from 'i18next';
-import { find, forEach, join, map, some, upperFirst } from 'lodash';
+import {
+  find,
+  forEach,
+  isUndefined,
+  join,
+  map,
+  some,
+  upperFirst,
+} from 'lodash';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
   const guildService_ = GuildService;
@@ -64,7 +72,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
   const embed = defaultEmbed();
   embed.setAuthor({
-    name: user.username,
+    name: user.displayName || user.username,
     iconURL: user.avatarURL() || undefined,
   });
   embed.setTitle(t('title.new_party', { ns: 'party_command', lng: 'en' }));
@@ -227,7 +235,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       obj.overallXP = r.xp + f.xp + l.xp;
       highest.xp += obj.overallXP;
 
-      if (highest.xp < obj.overallXP || !highest.xp) {
+      if (highest.xp < obj.overallXP || isUndefined(highest.xp)) {
         highest.users = [p];
         highest.xp = obj.overallXP;
       } else if (highest.xp == obj.overallXP) {
@@ -295,7 +303,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
       resultEmbed.addFields([
         {
-          name: r.user.username,
+          name: r.user.displayName || r.user.username,
           value: `${result}${systemEmoji.blank} **${t('field.reward', {
             ns: 'party_command',
             lng: 'en',
@@ -380,6 +388,6 @@ export default new Command(
 
 const usersToList = (users: User[]) =>
   join(
-    map(users, (u) => `- ${u.username}`),
+    map(users, (u) => `- ${u.displayName || u.username}`),
     '\n',
   );

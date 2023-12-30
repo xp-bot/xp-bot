@@ -5,6 +5,9 @@ const i18nextConfig = {
   fallbackLng: 'en',
   fallbackNS: 'global',
   supportedLngs: ['en', 'de'],
+  interpolation: {
+    escapeValue: false,
+  },
   ns: [
     'global',
     'level_command',
@@ -19,6 +22,7 @@ const i18nextConfig = {
     'roll_command',
     'loot_command',
     'party_command',
+    'about_command',
   ],
   debug: !!process.env.DEBUG_GUILD_ID,
 };

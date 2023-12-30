@@ -74,7 +74,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         t(`game.result.easter_egg.${easterEggRoll}.title`, {
           ns: 'fish_command',
           lng: 'en',
-          user: `**${user.username}**`,
+          user: `**${user.displayName || user.username}**`,
           xp: `**${fishResult.xp}xp**`,
         }),
       )
@@ -82,7 +82,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
         t(`game.result.easter_egg.${easterEggRoll}.description`, {
           ns: 'fish_command',
           lng: 'en',
-          user: `**${user.username}**`,
+          user: `**${user.displayName || user.username}**`,
           xp: `**${fishResult.xp}xp**`,
         }),
       );
@@ -91,7 +91,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       `${systemEmoji.fish} | ${t(`game.result.${fishResult.result}`, {
         ns: 'fish_command',
         lng: 'en',
-        user: `**${user.username}**`,
+        user: `**${user.displayName || user.username}**`,
         xp: `**${fishResult.xp}xp**`,
       })}`,
     );
@@ -106,7 +106,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
       userData: {
         avatar: user.avatar || undefined,
         banner: user.banner || undefined,
-        username: user.username,
+        username: user.displayName || user.username,
       },
     },
   });
