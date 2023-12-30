@@ -4,7 +4,7 @@ Thank you for considering contributing to the v9 project. Your contributions hel
 
 ## Getting Started
 
-1. **Fork the Repository**: You can start by forking this repository. This will create a copy of the project in your own GitHub account.
+1. **Fork the Repository**: You can start by forking this repository. (Please use `development` as your base branch) This will create a copy of the project in your own GitHub account.
 
 2. **Create a New Branch**: It's important to work in a dedicated branch for your changes. Branch names should follow this structure:
 
