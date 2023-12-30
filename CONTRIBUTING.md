@@ -59,42 +59,23 @@ Key categories will always be named in a singular form. (e.g. button.x instead o
 - Every command's namespace, has to have the following keys:
   - `command_info.name`
   - `command_info.description`
-- If the command has values, these have to be named as follows:
+- If the command has options/values, these have to be named as follows:
   - `command_info.option.<option_name>.name`
   - `command_info.option.<option_name>.description`
-  > Note, that these translations will not be applied automatically. You have to apply them manually in the command's declaration code.\
+  > Note, that these translations will be applied automatically. We have built quite a cool command registration allowing you to essentially forget about managing these translations in code. Just declare the commands name and any additional options you may or may not want to implement.\
   > Example:\
   > ```ts
   > export default new Command(
-  >   new SlashCommandBuilder().setName('level').addIntegerOption((option) =>
-  >     option
-  >       .setName('level')
-  >       // This description is essentially a fallback.
-  >       .setDescription('The level to check the required xp for.')
-  >       // Also provide fallbacks for option names. (The second argument in the array is the fallback value. "level" in this case.)
-  >       .setNameLocalizations({
-  >         de: t(['command_info.option.level.name', 'level'], {
-  >           ns: 'level_command',
-  >           lng: 'de',
-  >         }),
-  >         'en-US': t(['command_info.option.level.name', 'level'], {
-  >           ns: 'level_command',
-  >           lng: 'en',
-  >         }),
-  >       })
-  >       // Also provide fallbacks for option descriptions. (The second argument in the array is the fallback value.)
-  >       .setDescriptionLocalizations({
-  >         de: t(['command_info.option.level.description', 'The level to check the required xp for.'], {
-  >           ns: 'level_command',
-  >           lng: 'de',
-  >         }),
-  >         'en-US': t(['command_info.option.level.description', 'The level to check the required xp for.'], {
-  >           ns: 'level_command',
-  >           lng: 'en',
-  >         }),
-  >       })
-  >       .setRequired(true),
-  >   ),
+  >   {
+  >     name: 'incognito',
+  >     options: [
+  >       {
+  >         name: 'incognito',
+  >         type: CommandOptionType.BOOLEAN,
+  >         required: true,
+  >       },
+  >     ],
+  >   },
   >   execute,
   > );
   > ```
@@ -104,13 +85,6 @@ Key categories will always be named in a singular form. (e.g. button.x instead o
 The global namespace is intended to be used for very generic translations or strings that can and will be used everywhere without context.
 
 > E.g. title.success in namespace set_xp_command, button.join in namespace party_command, ok in namespace global, ...
-
-```ts
-  // Building a key correctly
-  party_command / `title`.`success`
-        ^            ^        ^
-    Namespace | Category | Content
-```
 
 ## Pull Requests
 
