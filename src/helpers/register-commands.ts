@@ -17,16 +17,19 @@ export default () => {
 
   const foldersPath = path.join(__dirname, '..', 'commands');
   const commandFolders = fs.readdirSync(foldersPath);
-
   for (const folder of commandFolders) {
     const commandsPath = path.join(foldersPath, folder);
-    const commandFiles = filter(fs.readdirSync(commandsPath), (file) =>
-      endsWith(file, '.ts'),
+
+    const commandFiles = filter(
+      fs.readdirSync(commandsPath),
+      (file) => endsWith(file, '.ts') || endsWith(file, '.js'),
     );
     for (const file of commandFiles) {
       const filePath = path.join(commandsPath, file);
+
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const command: Command = require(filePath).default;
+
       if (!command.deleteCommand) {
         command.registerCommand();
       } else {

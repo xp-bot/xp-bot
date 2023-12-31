@@ -1,17 +1,14 @@
 import customLogger from './helpers/custom-logger';
 import { ShardingManager } from 'discord.js';
 import dotenv from 'dotenv';
-import { map, split, toNumber } from 'lodash';
 import path from 'path';
 dotenv.config();
 
 customLogger();
 
-const manager = new ShardingManager(path.join(__dirname, './bot.js'), {
+const manager = new ShardingManager(path.join(__dirname, './bot.ts'), {
   token: process.env.TOKEN!,
-  shardList: map(split(process.env.SHARD_LIST!, ','), toNumber),
-  totalShards: toNumber(process.env.TOTAL_SHARDS!),
-  mode: 'worker',
+  execArgv: ['-r', 'ts-node/register'],
 });
 
 manager.on('shardCreate', (shard) =>

@@ -3,14 +3,10 @@ import discordClient from './clients/discord-client';
 import handlers from './handlers/discord-events';
 import customLogger from './helpers/custom-logger';
 import initI18n from './helpers/localization/init-i18n';
-import * as Sentry from '@sentry/node';
-import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events } from 'discord.js';
 import dotenv from 'dotenv';
 import { trimEnd } from 'lodash';
 dotenv.config();
-
-// You can also use CommonJS `require('@sentry/node')` instead of `import`
 
 // Sentry.init({
 //   dsn: process.env.SENTRY_DSN,

@@ -4,6 +4,7 @@ import {
   GatewayIntentBits,
   Options,
 } from 'discord.js';
+import { map } from 'lodash';
 
 const cachingOverrides: CacheWithLimitsOptions = {
   MessageManager: 0,
@@ -36,6 +37,12 @@ const discordClient = new Client({
     ...Options.DefaultMakeCacheSettings,
     ...cachingOverrides,
   }),
+  // Just some playing around
+  // shards: [1, 2, 3, 4],
+  // shardCount: 4,
+  // ws: {
+  //   buildStrategy: (manager) => {},
+  // },
 });
 
 export default discordClient;
