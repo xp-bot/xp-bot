@@ -13,7 +13,7 @@ export default (passthrough: CommandPassthrough) => {
     })
   ) {
     console.error(
-      `[Command Registration] Localization key missing for command name: ${sanatisedCommandName}`,
+      `[Command Registration | ${sanatisedCommandName}] Localization key missing for command name`,
     );
     process.exit(1);
   }
@@ -24,7 +24,7 @@ export default (passthrough: CommandPassthrough) => {
     })
   ) {
     console.error(
-      `[Command Registration] Localization key missing for command description: ${sanatisedCommandName}`,
+      `[Command Registration | ${sanatisedCommandName}] Localization key missing for command description`,
     );
     process.exit(1);
   }
@@ -36,7 +36,7 @@ export default (passthrough: CommandPassthrough) => {
       })
     ) {
       console.error(
-        `[Command Registration] Localization key missing for option name: ${option.name} in command: ${sanatisedCommandName}`,
+        `[Command Registration | ${sanatisedCommandName} / ${option.name}] Localization key missing for option name`,
       );
       process.exit(1);
     }
@@ -47,7 +47,7 @@ export default (passthrough: CommandPassthrough) => {
       })
     ) {
       console.error(
-        `[Command Registration] Localization key missing for option description: ${option.name} in command: ${sanatisedCommandName}`,
+        `[Command Registration | ${sanatisedCommandName} / ${option.name}] Localization key missing for option description`,
       );
       process.exit(1);
     }

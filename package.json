@@ -12,7 +12,7 @@
     "start:prod": "NODE_ENV=production node build/index.js | pino-pretty",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "generate-services": "curl http://xp-bot.net:3001/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/generator-overrides/request.ts --client axios --useOptions",
+    "generate-services": "curl https://bot-staging-api.xp-bot.net/openapi.json -o ./openapi.json && openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/overrides/request.ts --client axios --useOptions",
     "generate-services:local": "openapi --input ./openapi.json --output ./src/api/generated --request ./src/api/overrides/request.ts --client axios --useOptions",
     "translate": "i18nexus pull -k 6WtsUiuNBRFehb7Z1biZFg -p src/locales",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org namespacemedia --project node ./build && sentry-cli sourcemaps upload --org namespacemedia --project node ./build"
@@ -23,6 +23,7 @@
     "@sentry/profiling-node": "^1.2.6",
     "@types/node": "^20.8.9",
     "axios": "^1.6.0",
+    "dayjs": "^1.11.10",
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
     "i18next": "^23.6.0",

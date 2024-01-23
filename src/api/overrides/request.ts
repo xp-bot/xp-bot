@@ -206,6 +206,7 @@ const sendRequest = async <T>(
   const source = axios.CancelToken.source();
 
   const requestConfig: AxiosRequestConfig = {
+    baseURL: process.env.API,
     url,
     headers,
     data: body ?? formData,

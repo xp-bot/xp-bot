@@ -23,8 +23,9 @@ const i18nextConfig = {
     'loot_command',
     'party_command',
     'about_command',
+    'voicetime_command',
   ],
-  debug: !!process.env.DEBUG_GUILD_ID,
+  // debug: !!process.env.DEBUG_GUILD_ID,
 };
 
 export default i18n
