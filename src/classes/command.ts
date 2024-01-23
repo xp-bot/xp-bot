@@ -29,6 +29,7 @@ export enum CommandOptionType {
 
 export interface CommandPassthrough {
   name: string;
+  adminOnly?: boolean;
   options?: {
     name: string;
     type: CommandOptionType;
@@ -59,7 +60,7 @@ export default class Command {
 
   execute = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
-    console.debug(`Recieved command request [${this.slashCommand.name}]`);
+    console.debug(`Received command request [${this.slashCommand.name}]`);
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
         console.debug(
