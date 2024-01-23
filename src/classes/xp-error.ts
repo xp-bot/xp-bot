@@ -3,8 +3,11 @@ export enum XPErrorType {
   INTERACTION_USER_UNRESOLVABLE = 'interaction_user_unresolvable',
   INTERACTION_OPTIONS_INVALID = 'interaction_options_invalid',
 
+  GUILD_MEMBER_UNRESOLVABLE = 'guild_member_unresolvable',
+
   API_GUILD_MEMBER_UPDATE = 'api_guild_member_update',
   API_GUILD_MEMBER_FETCH = 'api_guild_member_fetch',
+  API_USER_FETCH = 'api_user_fetch',
 
   API_GUILD_FETCH = 'api_guild_fetch',
   API_GUILD_UPDATE = 'api_guild_update',
@@ -32,12 +35,23 @@ export const XPErrorTypeDetails: Record<
       'The options you provided are invalid. Please check your input and try again.',
   },
 
+  [XPErrorType.GUILD_MEMBER_UNRESOLVABLE]: {
+    title: 'Member Unresolvable',
+    description:
+      'We were unable to resolve the member while trying to execute the requested action.',
+  },
+
   [XPErrorType.API_GUILD_MEMBER_UPDATE]: {
     title: 'API Error',
     description:
-      'An error occurred while trying to update user settings. Please try again later.',
+      'An error occurred while trying to update guild member settings. Please try again later.',
   },
   [XPErrorType.API_GUILD_MEMBER_FETCH]: {
+    title: 'API Error',
+    description:
+      'An error occurred while trying to fetch guild member settings. Please try again later.',
+  },
+  [XPErrorType.API_USER_FETCH]: {
     title: 'API Error',
     description:
       'An error occurred while trying to fetch user settings. Please try again later.',

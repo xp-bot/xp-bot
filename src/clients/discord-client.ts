@@ -28,11 +28,10 @@ const cachingOverrides: CacheWithLimitsOptions = {
   GuildScheduledEventManager: 0,
   GuildTextThreadManager: 0,
   ReactionUserManager: 0,
-  VoiceStateManager: 0,
 };
 
 const discordClient = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
   makeCache: Options.cacheWithLimits({
     ...Options.DefaultMakeCacheSettings,
     ...cachingOverrides,

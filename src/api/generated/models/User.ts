@@ -15,6 +15,8 @@ export type User = {
         };
         language?: string | null;
     };
-    timestamps: Record<string, string | null>;
+    timestamps: {
+        join_voicechat: number | null;
+    };
 };
 

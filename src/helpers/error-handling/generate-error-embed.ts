@@ -11,7 +11,8 @@ import {
 
 export default (error: XPError): MessagePayload | InteractionReplyOptions => {
   const errorEmbed = defaultEmbed(DefaultEmbedType.ERROR);
-  errorEmbed.setTitle(error.title).setDescription(`> ${error.description}`);
+  errorEmbed.setTitle(error.title || 'Unknown Error');
+  error.description && errorEmbed.setDescription(`> ${error.description}`);
   errorEmbed.setFooter({
     text: `Stack: ${getSanatisedStacktrace(error)}`,
   });
