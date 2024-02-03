@@ -42,7 +42,6 @@ export default (client: Client) => {
     const welcomeEmbed = new EmbedBuilder()
       .setThumbnail(guild.client.user?.displayAvatarURL())
       .setTitle('Welcome to XP 👋')
-      .setColor('Blue')
       .setDescription(
         'We are happy, that you chose XP for your server!\nXP is a leveling bot, that allows you to reward your members for their activity.\n\nIf you need help, feel free to join our [support server](https://discord.xp-bot.net)!',
       )

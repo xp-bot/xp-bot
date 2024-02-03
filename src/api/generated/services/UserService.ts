@@ -138,7 +138,9 @@ export class UserService {
                 };
                 language?: string | null;
             };
-            timestamps?: Record<string, string | null>;
+            timestamps: {
+                join_voicechat: number | null;
+            };
         },
     }): CancelablePromise<User> {
         return __request(OpenAPI, {

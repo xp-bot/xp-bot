@@ -47,7 +47,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
   }
 
   interaction.reply(
-    `${process.env.API_URL}rank/${guildId}/${userId}?${Date.now()}`,
+    `${process.env.API_URL}/rank/${guildId}/${userId}?${Date.now()}`,
   );
 };
 
