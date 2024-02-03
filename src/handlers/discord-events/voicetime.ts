@@ -63,9 +63,9 @@ const isSessionValid = (state: VoiceState, channel: VoiceBasedChannel | null) =>
   channel.id !== state.guild.afkChannelId;
 
 export default (client: Client) => {
-  const logInfo = (message: string) => console.log(`[VTM - INFO] ${message}`);
+  const logInfo = (message: string) => console.debug(`[VTM - INFO] ${message}`);
   const logAction = (message: string) =>
-    console.log(`[VTM - ACTION] ${message}`);
+    console.debug(`[VTM - ACTION] ${message}`);
 
   client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
     const { channel: newUserChannel } = newState;
@@ -104,60 +104,3 @@ export default (client: Client) => {
     }
   });
 };
-
-// export default (client: Client) => {
-//   client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
-//     const newUserChannel = newState.channel;
-//     const oldUserChannel = oldState.channel;
-
-//     const newSessionValid =
-//       newUserChannel &&
-//       !newState.selfMute &&
-//       newUserChannel.members.size > 1 &&
-//       newUserChannel.id !== newState.guild.afkChannelId;
-
-//     const oldSessionValid =
-//       oldUserChannel &&
-//       !oldState.selfMute &&
-//       oldUserChannel.members.size > 1 &&
-//       oldUserChannel.id !== oldState.guild.afkChannelId;
-
-//     if (oldUserChannel === null && newUserChannel !== null) {
-//       console.log('[VTM - INFO] User has initially joined the channel.');
-
-//       if (newSessionValid) {
-//         console.log(
-//           '[VTM - ACTION] User has joined the channel. Starting session.',
-//         );
-//         handleStartSession(newState.id, newState.guild.id);
-//       } else {
-//         console.log(
-//           '[VTM - ACTION] User has joined an invalid session. Doing nothing.',
-//         );
-//       }
-//     } else if (newUserChannel === null && oldSessionValid) {
-//       console.log('[VTM - INFO] User has left the channel.');
-//       console.log('[VTM - ACTION] User has left the channel. Ending session.');
-//       handleEndSession(oldState.id, newState.guild.id);
-//     } else {
-//       console.log(
-//         '[VTM - INFO] User has changed channels, is deafened, alone, in an AFK channel or has left / switched from and to an invalid session.',
-//       );
-
-//       if (!newSessionValid && oldSessionValid) {
-//         console.log(
-//           '[VTM - ACTION] User is deafened, alone, or in AFK channel. Ending session.',
-//         );
-//         handleEndSession(newState.id, newState.guild.id);
-//       } else if (!oldSessionValid && newSessionValid) {
-//         console.log(
-//           '[VTM - ACTION] User has changed channels. Starting session.',
-//         );
-//         handleStartSession(newState.id, newState.guild.id);
-//       } else if (!oldSessionValid && !newSessionValid) {
-//         console.log('[VTM - ACTION] Doing nothing.');
-//         // handleEndSession(newState.id, newState.guild.id);
-//       }
-//     }
-//   });
-// };
