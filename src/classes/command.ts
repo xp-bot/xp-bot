@@ -70,11 +70,9 @@ export default class Command {
     this.executeCallback = executeCallback;
   }
 
-  getRegistratorData = () => {
-    return this.slashCommand.toJSON();
-  };
+  getRegistratorData = () => this.slashCommand.toJSON();
 
-  execute = async (interaction: Interaction) => {
+  exec = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
     console.debug(`Received command request [${this.slashCommand.name}]`);
     this.executeCallback(interaction as ChatInputCommandInteraction)

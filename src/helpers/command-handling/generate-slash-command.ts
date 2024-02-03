@@ -12,7 +12,6 @@ import { forEach, get, map, replace, toLower } from 'lodash';
 
 export default (passthrough: CommandPassthrough) => {
   const slashCommand = new SlashCommandBuilder().setName(passthrough.name);
-  const fallbackString = `${passthrough.name} command`;
   const sanatisedCommandName = sanatiseCommandName(passthrough.name);
 
   passthrough.adminOnly && slashCommand.setDefaultMemberPermissions('0');
@@ -25,22 +24,26 @@ export default (passthrough: CommandPassthrough) => {
     lng: string,
     sanatise?: boolean,
   ) => {
-    const translated = t([`command_info.${key}`], {
+    const translated = t([`command_info.${key}`, fallback], {
       ns: `${sanatisedCommandName}_command`,
       lng,
     });
     return sanatise ? toLower(replace(translated, /\s+/g, '')) : translated;
   };
 
-  const localizations = {
+  const nameLocalizations = {
     de: localize('name', slashCommand.name, 'de'),
     'en-US': localize('name', slashCommand.name, 'en'),
   };
+  const descriptionLocalizations = {
+    de: localize('description', slashCommand.name, 'de'),
+    'en-US': localize('description', slashCommand.name, 'en'),
+  };
 
   slashCommand
-    .setDescription(localize('description', fallbackString, 'en'))
-    .setNameLocalizations(localizations)
-    .setDescriptionLocalizations(localizations);
+    .setDescription(descriptionLocalizations['en-US'])
+    .setNameLocalizations(nameLocalizations)
+    .setDescriptionLocalizations(descriptionLocalizations);
 
   const commandOptionTypes: Record<CommandOptionType, string> = {
     [CommandOptionType.STRING]: 'addStringOption',
