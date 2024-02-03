@@ -1,1 +1,1 @@
-{"command_info":{"description":"Testen Sie Ihr Glück und würfeln Sie.","name":"rollen"},"game":{"result":"{{user}} hat {{xp}} erhalten, indem er ein {{result}} mit den Würfeln gewürfelt hat!"}}
+{"game":{"result":"{{user}} hat {{xp}} erhalten, indem er ein {{result}} mit den Würfeln gewürfelt hat!"},"command_info":{"name":"rollen","description":"Testen Sie Ihr Glück und würfeln Sie."}}

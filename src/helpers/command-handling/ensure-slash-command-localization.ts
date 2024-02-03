@@ -1,5 +1,5 @@
 import sanatiseCommandName from './sanatise-command-name';
-import { CommandPassthrough } from '../../classes/command';
+import { CommandOptionType, CommandPassthrough } from '../../classes/command';
 import i18next from 'i18next';
 import { forEach, some } from 'lodash';
 
@@ -32,5 +32,25 @@ export default (passthrough: CommandPassthrough) => {
       );
       process.exit(1);
     }
+
+    if (
+      option.type === CommandOptionType.STRING ||
+      option.type === CommandOptionType.NUMBER
+    )
+      forEach(option.choices, (choice) => {
+        if (
+          !i18next.exists(
+            `command_info.option.${option.name}.choice.${choice.name}`,
+            {
+              ns: baseNamespace,
+            },
+          )
+        ) {
+          console.error(
+            `[Command Registration | ${sanatisedCommandName} / ${option.name} / ${choice.name}] Localization key missing for option choice`,
+          );
+          process.exit(1);
+        }
+      });
   });
 };

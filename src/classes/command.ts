@@ -30,11 +30,27 @@ export enum CommandOptionType {
 export interface CommandPassthrough {
   name: string;
   adminOnly?: boolean;
-  options?: {
-    name: string;
-    type: CommandOptionType;
-    required: boolean;
-  }[];
+  options?: (
+    | {
+        name: string;
+        type:
+          | CommandOptionType.BOOLEAN
+          | CommandOptionType.INTEGER
+          | CommandOptionType.USER
+          | CommandOptionType.CHANNEL
+          | CommandOptionType.ROLE
+          | CommandOptionType.MENTIONABLE;
+        required: boolean;
+      }
+    | {
+        name: string;
+        type: CommandOptionType.STRING | CommandOptionType.NUMBER;
+        choices: {
+          name: string;
+        }[];
+        required: boolean;
+      }
+  )[];
 }
 
 export default class Command {

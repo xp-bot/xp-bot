@@ -1,1 +1,1 @@
-{"command_info":{"description":"Geben Sie XP an einen bestimmten Benutzer.","name":"addxp","option":{"user":{"description":"Der Benutzer, dem Sie XP geben möchten.","name":"Benutzer"},"xp":{"description":"Die Menge an XP, die Sie dem Benutzer geben möchten.","name":"xp"}}}}
+{"command_info":{"name":"addxp","option":{"xp":{"name":"xp","description":"Die Menge an XP, die Sie dem Benutzer geben möchten."},"user":{"name":"Benutzer","description":"Der Benutzer, dem Sie XP geben möchten."}},"description":"Geben Sie XP an einen bestimmten Benutzer."}}

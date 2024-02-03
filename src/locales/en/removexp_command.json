@@ -1,1 +1,1 @@
-{"command_info":{"description":"Remove xp from a specified user.","name":"removexp","option":{"user":{"description":"Ther user you want remove xp from.","name":"user"},"xp":{"description":"The amount of xp you want to remove from the user.","name":"xp"}}}}
+{"command_info":{"name":"removexp","option":{"xp":{"name":"xp","description":"The amount of xp you want to remove from the user."},"user":{"name":"user","description":"Ther user you want remove xp from."}},"description":"Remove xp from a specified user."}}

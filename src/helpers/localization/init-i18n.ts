@@ -24,6 +24,7 @@ const i18nextConfig = {
     'party_command',
     'about_command',
     'voicetime_command',
+    'setstreak_command',
   ],
   // debug: !!process.env.DEBUG_GUILD_ID,
 };
