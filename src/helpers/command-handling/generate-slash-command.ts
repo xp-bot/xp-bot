@@ -1,9 +1,14 @@
 import ensureSlashCommandLocalization from './ensure-slash-command-localization';
 import sanatiseCommandName from './sanatise-command-name';
 import { CommandPassthrough, CommandOptionType } from '../../classes/command';
-import { SlashCommandBooleanOption, SlashCommandBuilder } from 'discord.js';
+import {
+  APIApplicationCommandOptionChoice,
+  SlashCommandBooleanOption,
+  SlashCommandBuilder,
+  SlashCommandStringOption,
+} from 'discord.js';
 import { t } from 'i18next';
-import { forEach, get } from 'lodash';
+import { forEach, get, map, replace, toLower } from 'lodash';
 
 export default (passthrough: CommandPassthrough) => {
   const slashCommand = new SlashCommandBuilder().setName(passthrough.name);
@@ -14,11 +19,18 @@ export default (passthrough: CommandPassthrough) => {
 
   ensureSlashCommandLocalization(passthrough);
 
-  const localize = (key: string, fallback: string, lng: string) =>
-    t([`command_info.${key}`, fallback], {
+  const localize = (
+    key: string,
+    fallback: string,
+    lng: string,
+    sanatise?: boolean,
+  ) => {
+    const translated = t([`command_info.${key}`], {
       ns: `${sanatisedCommandName}_command`,
       lng,
     });
+    return sanatise ? toLower(replace(translated, /\s+/g, '')) : translated;
+  };
 
   const localizations = {
     de: localize('name', slashCommand.name, 'de'),
@@ -43,8 +55,8 @@ export default (passthrough: CommandPassthrough) => {
 
   forEach(passthrough.options, (option) => {
     const optionNames = {
-      'en-US': localize(`option.${option.name}.name`, option.name, 'en'),
-      de: localize(`option.${option.name}.name`, option.name, 'de'),
+      'en-US': localize(`option.${option.name}.name`, option.name, 'en', true),
+      de: localize(`option.${option.name}.name`, option.name, 'de', true),
     };
 
     const optionDescriptions = {
@@ -52,14 +64,43 @@ export default (passthrough: CommandPassthrough) => {
       de: localize(`option.${option.name}.description`, option.name, 'de'),
     };
 
-    const buildOptionConfiguration = (o: SlashCommandBooleanOption) =>
-      o
-        .setName(optionNames['en-US'])
+    const buildOptionConfiguration = (o: SlashCommandStringOption) => {
+      o.setName(optionNames['en-US'])
         .setDescription(optionDescriptions['en-US'])
         .setRequired(option.required)
         .setNameLocalizations(optionNames)
         .setDescriptionLocalizations(optionDescriptions);
 
+      if (
+        option.type === CommandOptionType.STRING ||
+        option.type === CommandOptionType.NUMBER
+      ) {
+        const choices: APIApplicationCommandOptionChoice<string>[] = map(
+          option.choices,
+          (choice) => {
+            const choiceNames = {
+              'en-US': localize(
+                `option.${option.name}.choice.${choice.name}`,
+                choice.name,
+                'en',
+              ),
+              de: localize(
+                `option.${option.name}.choice.${choice.name}`,
+                choice.name,
+                'de',
+              ),
+            };
+            return {
+              name: choiceNames['en-US'],
+              value: choice.name,
+              name_localizations: choiceNames,
+            };
+          },
+        );
+        o.setChoices(...choices);
+      }
+      return o;
+    };
     const commandOptionType = get(commandOptionTypes, option.type);
     if (commandOptionType)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

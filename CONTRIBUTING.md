@@ -62,19 +62,34 @@ Key categories will always be named in a singular form. (e.g. button.x instead o
 - If the command has options/values, these have to be named as follows:
   - `command_info.option.<option_name>.name`
   - `command_info.option.<option_name>.description`
+  - If the option has choice restrictions, these have to be named as follows:
+    - `command_info.option.<option_name>.choice.<choice_name>`
   > Please be aware that these translations will be seamlessly implemented through automated processes. Our advanced command registration system simplifies the management of translations in your code. Simply specify the command's name and any optional settings you may wish to include, and you can essentially eliminate the need for manual intervention in the translation process.  
   > Example:  
   > ```ts
   > export default new Command(
   >   {
-  >     name: 'incognito',
-  >     options: [
-  >       {
-  >         name: 'incognito',
-  >         type: CommandOptionType.BOOLEAN,
-  >         required: true,
-  >       },
-  >     ],
+  >    name: 'setstreak',
+  >    options: [
+  >      {
+  >        name: 'user',
+  >        required: true,
+  >        type: CommandOptionType.USER,
+  >      },
+  >      {
+  >        name: 'type',
+  >        required: true,
+  >        type: CommandOptionType.STRING,
+  >        choices: [ // Choices are optional. (They are also only available on string options)
+  >          {
+  >            name: 'daily',
+  >          },
+  >          {
+  >            name: 'trivia',
+  >          },
+  >        ],
+  >      },
+  >    ],
   >   },
   >   execute,
   > );
