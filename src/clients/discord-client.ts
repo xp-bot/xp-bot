@@ -4,7 +4,6 @@ import {
   GatewayIntentBits,
   Options,
 } from 'discord.js';
-import { map } from 'lodash';
 
 const cachingOverrides: CacheWithLimitsOptions = {
   MessageManager: 0,
@@ -18,7 +17,7 @@ const cachingOverrides: CacheWithLimitsOptions = {
   GuildStickerManager: 0,
   GuildEmojiManager: 0,
   ReactionManager: 0,
-  GuildMemberManager: 0,
+  // GuildMemberManager: 0,
   ApplicationCommandManager: 0,
   AutoModerationRuleManager: 0,
   BaseGuildEmojiManager: 0,

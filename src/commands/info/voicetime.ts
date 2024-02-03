@@ -53,9 +53,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
     }));
 
   const voice = guildMember.voice;
-  // TODO: Change to new api schema
-  const joinedVoiceTimestamp =
-    (xpUser as any).content.timestamps?.join_voicechat || null;
+  const joinedVoiceTimestamp = xpUser.timestamps?.join_voicechat || null;
 
   const embed = defaultEmbed();
 
