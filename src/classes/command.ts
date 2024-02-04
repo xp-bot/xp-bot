@@ -9,7 +9,7 @@ import {
   Interaction,
   SlashCommandBuilder,
 } from 'discord.js';
-import { noop } from 'lodash';
+import { noop, toUpper } from 'lodash';
 
 type slashCommandBuilderData = Omit<
   SlashCommandBuilder,
@@ -74,19 +74,23 @@ export default class Command {
 
   exec = async (interaction: Interaction) => {
     if (!interaction.isCommand()) return;
-    console.debug(`Received command request [${this.slashCommand.name}]`);
+    console.debug(
+      `[COMMAND: ${toUpper(this.slashCommand.name)}] Received command request`,
+    );
     this.executeCallback(interaction as ChatInputCommandInteraction)
       .then(() => {
         console.debug(
-          `Successfully executed command [${this.slashCommand.name}]`,
+          `[COMMAND: ${toUpper(
+            this.slashCommand.name,
+          )}] Successfully executed command`,
         );
       })
       .catch((error: XPError) => {
         Sentry.captureException(error);
         console.error(
-          `${error.message} - [${
-            this.slashCommand.name
-          }] - '${getSanatisedStacktrace(error)}'`,
+          `COMMAND: ${toUpper(this.slashCommand.name)}] ${
+            error.message
+          }  - '${getSanatisedStacktrace(error)}'`,
         );
         interaction.reply(generateErrorEmbed(error)).catch(noop);
       });

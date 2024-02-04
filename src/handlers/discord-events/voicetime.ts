@@ -4,6 +4,7 @@ import {
   UserService,
 } from '../../api/generated';
 import XPError, { XPErrorType } from '../../classes/xp-error';
+import eventErrorHandler from '../../helpers/event-error-handler';
 import calculateVoicetimeXp from '../../helpers/numbers/calculate-voicetime-xp';
 import { Client, Events, VoiceBasedChannel, VoiceState } from 'discord.js';
 
@@ -67,40 +68,42 @@ export default (client: Client) => {
   const logAction = (message: string) =>
     console.debug(`[VTM - ACTION] ${message}`);
 
-  client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
-    const { channel: newUserChannel } = newState;
-    const { channel: oldUserChannel } = oldState;
+  eventErrorHandler(Events.ClientReady, async () => {
+    client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
+      const { channel: newUserChannel } = newState;
+      const { channel: oldUserChannel } = oldState;
 
-    const newSessionValid = isSessionValid(newState, newUserChannel);
-    const oldSessionValid = isSessionValid(oldState, oldUserChannel);
+      const newSessionValid = isSessionValid(newState, newUserChannel);
+      const oldSessionValid = isSessionValid(oldState, oldUserChannel);
 
-    if (!oldUserChannel && newUserChannel) {
-      logInfo('User has initially joined the channel.');
-      if (newSessionValid) {
-        logAction('Session Valid. Starting session.');
-        handleStartSession(newState.id, newState.guild.id);
+      if (!oldUserChannel && newUserChannel) {
+        logInfo('User has initially joined the channel.');
+        if (newSessionValid) {
+          logAction('Session Valid. Starting session.');
+          handleStartSession(newState.id, newState.guild.id);
+        } else {
+          logAction('Session Invalid. Doing nothing.');
+        }
+      } else if (!newUserChannel && oldSessionValid) {
+        logInfo('User has left the channel.');
+        logAction('Session was Valid. Ending session.');
+        handleEndSession(oldState.id, newState.guild.id);
       } else {
-        logAction('Session Invalid. Doing nothing.');
+        logInfo('User has changed channels or has updated their voice state.');
+        if (!newSessionValid && oldSessionValid) {
+          logAction(
+            'Old Session was Valid but the new Session is not. Ending session.',
+          );
+          handleEndSession(newState.id, newState.guild.id);
+        } else if (!oldSessionValid && newSessionValid) {
+          logAction(
+            'Old Session was invalid but the new one is Valid. Starting session.',
+          );
+          handleStartSession(newState.id, newState.guild.id);
+        } else {
+          logAction('New and old session are invalid. Doing nothing.');
+        }
       }
-    } else if (!newUserChannel && oldSessionValid) {
-      logInfo('User has left the channel.');
-      logAction('Session was Valid. Ending session.');
-      handleEndSession(oldState.id, newState.guild.id);
-    } else {
-      logInfo('User has changed channels or has updated their voice state.');
-      if (!newSessionValid && oldSessionValid) {
-        logAction(
-          'Old Session was Valid but the new Session is not. Ending session.',
-        );
-        handleEndSession(newState.id, newState.guild.id);
-      } else if (!oldSessionValid && newSessionValid) {
-        logAction(
-          'Old Session was invalid but the new one is Valid. Starting session.',
-        );
-        handleStartSession(newState.id, newState.guild.id);
-      } else {
-        logAction('New and old session are invalid. Doing nothing.');
-      }
-    }
+    });
   });
 };

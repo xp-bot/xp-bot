@@ -3,6 +3,7 @@ import interactionCreate from './interaction-create';
 import ready from './ready';
 import voicetime from './voicetime';
 import discordClient from '../../clients/discord-client';
+import eventErrorHandler from '../../helpers/event-error-handler';
 import { Client } from 'discord.js';
 
 export default (client?: Client) => {
